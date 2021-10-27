@@ -7,6 +7,8 @@
       </div>
       <div class="card-body">
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+         <!-- <div id="error-msg" class = "text-danger"><%#= render "devise/shared/error_messages", resource: resource %></div> -->
+
           <div class="form-group mt-2">
             <%= f.label :email_or_username, class: "form-label"  %><br />
             <%= f.email_field :email, autofocus: true, autocomplete: "email",  class: "form-control" %>
@@ -28,10 +30,12 @@
             <%= f.submit "Log in", class: "btn mt-4 w-100 btn-outline-primary" %>
           </div>
         <% end %>
+      </div>
+      <div class="text-center">
         <%= render "devise/shared/links" %>
       </div>
     </div>
-      </div>
     <div class="col-4"></div>
   </div>
 </div>
+<div class = "new-user-form"><%= render(template:'devise/registrations/new', resource: resource)%></div>

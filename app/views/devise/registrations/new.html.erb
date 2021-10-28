@@ -3,6 +3,7 @@
     <div class="col-4"></div>
     <div class="col-4">
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), remote:true) do |f| %>
+
         <div class="form-group mt-2">
           <%= f.label :first_name, class: "form-label" %>
           <%= f.text_field :firstname, autofocus: true,  class: "form-control" %>
@@ -22,7 +23,7 @@
           <%= f.label :password, class: "form-label" %>
           <br />
           <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
-          <div id="pswdHelp" class="form-text">
+          <div class="form-text">
             Your password must be 8-20 characters long, contain lower and uppercase letters, numbers, and special characters
           </div>
         </div>
@@ -31,13 +32,17 @@
           <%= f.label :password_confirmation, class: "form-label" %>
           <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
         </div>
-        <div id="privacyPoliicy" class="form-text">
-            Your personal data will be used to support your experience throughout this website to manage access to your account and for other purposes described in our <a href=# >privacy policy</a>
-          </div>
-          <div id="error-msg" class = "text-danger"></div>
-        <div class="actions">
-          <%= f.submit "Register", class: "btn mt-4 w-100 btn-outline-primary", id:"register-btn "%>
+
+        <div class="form-text mt-4">
+          Your personal data will be used to support your experience throughout this website to manage access to your account and for other purposes described in our <a href=# >privacy policy</a>
         </div>
+
+        <div id="error-msg" class = "text-danger"></div>
+
+        <div class="actions">
+          <%= f.submit "Register", class: "btn mt-4 w-100 btn-outline-primary"%>
+        </div>
+
       <% end %>
     </div>
     <div class="col-4"></div>

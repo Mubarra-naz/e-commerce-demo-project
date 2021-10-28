@@ -8,8 +8,7 @@
 <% end %>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%=link_to "New to site", "javascript:void(0)", class: 'sign-up-lnk'%>
-  <%#= link_to "New to BrentMark", new_registration_path(resource_name), class: 'sign-up-lnk', remote:true %><br />
+  <%= link_to "New to site", "javascript:void(0)", class: 'sign-up-lnk' %><br />
 <% end %>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>

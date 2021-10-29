@@ -2,6 +2,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     build_resource(sign_up_params)
     resource.save
+
     respond_to do |format|
       format.js do
         if resource.persisted?

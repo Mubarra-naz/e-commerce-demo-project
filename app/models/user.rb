@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
-      :recoverable, :rememberable, :validatable
+      :recoverable, :rememberable, :validatable, :confirmable
 
   validate :password_validation
   validates :firstname,:lastname, presence: true, format: { with: /^[a-zA-Z]{3,30}/, multiline: true, message: "should be either uppercase or lowercase alphabets only" }

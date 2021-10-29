@@ -10,7 +10,7 @@
   <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %><br />
 <% end %>
 
-<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+<%- if devise_mapping.registerable? && controller_name != 'registrations' && controller_name != 'confirmations' %>
   <%=link_to "New to site", "javascript:void(0)", class: 'sign-up-lnk'%><br>
 <% end %>
 

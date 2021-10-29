@@ -1,4 +1,5 @@
 class Users::SessionsController < Devise::SessionsController
+
   def create
     if User.find_by_email(params[:user][:email]).present?
       if User.find_by_email(params[:user][:email]).try(:confirmed_at).present?
@@ -10,4 +11,5 @@ class Users::SessionsController < Devise::SessionsController
       redirect_to root_path, notice:  'User not found'
     end
   end
+
 end

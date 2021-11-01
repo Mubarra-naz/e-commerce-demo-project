@@ -14,6 +14,8 @@ class User < ApplicationRecord
     @login || self.username || self.email
   end
 
+  private
+
   def self.find_for_database_authentication warden_condition
     conditions = warden_condition.dup
     if login = conditions.delete(:login)
@@ -23,7 +25,6 @@ class User < ApplicationRecord
     end
   end
 
-  private
   def password_validation
     rules = {
       'must contain at least one lowercase letter'  => /[a-z]+/,

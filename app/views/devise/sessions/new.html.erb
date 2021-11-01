@@ -8,10 +8,8 @@
       </div>
 
       <div class="card-body">
-        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-
-          <div class = "text-danger"><%= notice %></div>
-          <div class = "text-danger"><%= alert %></div>
+        <%= form_for resource, as: resource_name, url: session_path(resource_name) do |f| %>
+        <%= render 'devise/shared/flash_messages' %>
 
           <div class="form-group mt-2">
             <%= f.label :email_or_username, class: "form-label"  %><br />
@@ -33,7 +31,6 @@
           <div class="actions">
             <%= f.submit "Log in", class: "btn mt-4 w-100 btn-outline-primary" %>
           </div>
-
         <% end %>
       </div>
 
@@ -46,4 +43,4 @@
   </div>
 </div>
 
-<div class = "new-user-form"><%= render(template:'devise/registrations/new', resource: resource) %></div>
+<div class = "new-user-form"><%= render template:'devise/registrations/new', resource: resource %></div>

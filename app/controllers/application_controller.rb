@@ -5,8 +5,10 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:firstname, :lastname, :email, :password, :password_confirmation])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:firstname, :lastname, :email, :password, :password_confirmation])
+    added_attrs= [:firstname, :lastname, :email, :password, :password_confirmation]
+    devise_parameter_sanitizer.permit(:sign_up, keys: added_attrs)
+    devise_parameter_sanitizer.permit(:account_update, keys: added_attrs)
+    devise_parameter_sanitizer.permit(:sign_in, keys: [:login, :password, :remember_me])
   end
 
   def after_sign_in_path_for(resource)

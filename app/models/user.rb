@@ -5,8 +5,23 @@ class User < ApplicationRecord
 
   before_create :set_username
 
+  attr_writer :login
+
   validate :password_validation
   validates :firstname,:lastname, presence: true, format: { with: /^[a-zA-Z]{3,30}/, multiline: true, message: "should be either uppercase, lowercase or numeric value" }
+
+  def login
+    @login || self.username || self.email
+  end
+
+  def self.find_for_database_authentication warden_condition
+    conditions = warden_condition.dup
+    if login = conditions.delete(:login)
+      where(conditions.to_h).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+    elsif conditions.has_key?(:username) || conditions.has_key?(:email)
+      where(conditions.to_h).first
+    end
+  end
 
   private
   def password_validation

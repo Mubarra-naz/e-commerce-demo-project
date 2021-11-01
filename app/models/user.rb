@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-
   devise :database_authenticatable, :registerable,
       :recoverable, :rememberable, :validatable
 
@@ -25,5 +24,4 @@ class User < ApplicationRecord
   def set_username
     self.username = self.email.split('@').first
   end
-
 end

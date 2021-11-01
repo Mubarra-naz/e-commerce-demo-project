@@ -10,14 +10,15 @@
       <div class="card-body">
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
           <div class = "text-danger"><%= notice %></div>
+          <div class = "text-danger"><%= alert %></div>
 
           <div class="form-group mt-2">
-            <%= f.label :email_or_username, class: "form-label"  %><br />
+            <%= f.label :email_or_username, class: "form-label" %><br />
             <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
           </div>
 
           <div class="form-group mt-2">
-            <%= f.label :password, class: "form-label"  %><br />
+            <%= f.label :password, class: "form-label" %><br />
             <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
           </div>
 
@@ -43,4 +44,4 @@
   </div>
 </div>
 
-<div class = "new-user-form"><%= render(template:'devise/registrations/new', resource: resource) %></div>
+<div class="new-user-form"><%= render template:'devise/registrations/new', resource: resource %></div>

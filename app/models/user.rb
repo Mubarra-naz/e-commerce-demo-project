@@ -1,14 +1,12 @@
 class User < ApplicationRecord
-
   devise :database_authenticatable, :registerable,
       :recoverable, :rememberable, :validatable, :confirmable
-
-  before_create :set_username
 
   attr_writer :login
 
   validate :password_validation
-  validates :firstname,:lastname, presence: true, format: { with: /^[a-zA-Z]{3,30}/, multiline: true, message: "should be either uppercase, lowercase or numeric value" }
+  validates :firstname,:lastname, presence: true, format: { with: /^[a-zA-Z]{3,30}/, multiline: true, message: "should be either uppercase or lowercase alphabets only" }
+  validates :username, uniqueness: true, presence: true, format: { with: /^(?=.*[a-z])|(?=.*[A-Z])|(?=.*[0-9])(?=.{3,30})/, multiline: true, message: "should be either uppercase, lowercase or numeric value" }
 
   def login
     @login || self.username || self.email
@@ -34,12 +32,7 @@ class User < ApplicationRecord
     }
 
     rules.each do |message, regex|
-      errors.add( :password, message ) unless password.match( regex )
+      errors.add :password, message unless password.match(regex)
     end
   end
-
-  def set_username
-    self.username = self.email.split('@').first
-  end
-
 end

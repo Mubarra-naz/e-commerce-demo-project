@@ -5,5 +5,3 @@ $(document).ready(function(){
     $(".new-user-form").toggle();
   });
 });
-
-

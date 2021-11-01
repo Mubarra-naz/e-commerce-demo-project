@@ -3,7 +3,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     build_resource(sign_up_params)
     resource.save
     respond_to do |format|
-      format.js {
+      format.js do
         if resource.persisted?
           if resource.active_for_authentication?
             set_flash_message! :notice, :signed_up
@@ -18,7 +18,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
           clean_up_passwords resource
           set_minimum_password_length
         end
-      }
+      end
     end
   end
 end

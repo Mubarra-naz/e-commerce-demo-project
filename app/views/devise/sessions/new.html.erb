@@ -9,7 +9,6 @@
 
       <div class="card-body">
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-
           <div class="form-group mt-2">
             <%= f.label :email_or_username, class: "form-label"  %><br />
             <%= f.email_field :email, autofocus: true, autocomplete: "email",  class: "form-control" %>
@@ -30,11 +29,10 @@
           <div class="actions">
             <%= f.submit "Log in", class: "btn mt-4 w-100 btn-outline-primary" %>
           </div>
-
         <% end %>
       </div>
 
-      <div class="text-center">
+      <div class="text-center m-2">
         <%= render "devise/shared/links" %>
       </div>
 

@@ -1,0 +1,53 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-4"></div>
+    <div class="col-4">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), remote: true) do |f| %>
+        <div class="form-group mt-2">
+          <%= f.label :firstname, value: "First name", class: "form-label" %>
+          <%= f.text_field :firstname, autofocus: true, class: "form-control" %>
+        </div>
+
+        <div class="form-group mt-2">
+          <%= f.label :lastname, value: "Last name", class: "form-label" %>
+          <%= f.text_field :lastname, autofocus: true, class: "form-control" %>
+        </div>
+
+        <div class="form-group mt-2">
+          <%= f.label :email, class: "form-label" %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+        </div>
+
+        <div class="form-group mt-2">
+          <%= f.label :username, class: "form-label" %>
+          <%= f.text_field :username, autofocus: true, class: "form-control" %>
+        </div>
+
+        <div class="form-group mt-2">
+          <%= f.label :password, class: "form-label" %>
+          <br />
+          <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+          <div class="form-text">
+            Your password must be 8-20 characters long, contain lower and uppercase letters, numbers, and special characters
+          </div>
+        </div>
+
+        <div class="form-group mt-2">
+          <%= f.label :password_confirmation, class: "form-label" %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+        </div>
+
+        <div class="form-text mt-4">
+          Your personal data will be used to support your experience throughout this website to manage access to your account and for other purposes described in our Privacy policy.
+        </div>
+
+        <div id="error-msg"></div>
+
+        <div class="actions">
+          <%= f.submit "Register", class: "btn mt-4 w-100 btn-outline-primary" %>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-4"></div>
+  </div>
+</div>

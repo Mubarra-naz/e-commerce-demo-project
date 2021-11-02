@@ -5,11 +5,15 @@ class User < ApplicationRecord
   attr_writer :login
 
   validate :password_validation
-  validates :firstname,:lastname, presence: true, format: { with: /^[a-zA-Z]{3,30}/, multiline: true, message: "should be either uppercase or lowercase alphabets only" }
+  validates :firstname, :lastname, presence: true, format: { with: /^[a-zA-Z]{3,30}/, multiline: true, message: "should be either uppercase or lowercase alphabets only" }
   validates :username, uniqueness: true, presence: true, format: { with: /^(?=.*[a-z])|(?=.*[A-Z])|(?=.*[0-9])(?=.{3,30})/, multiline: true, message: "should be either uppercase, lowercase or numeric value" }
 
   def login
-    @login || self.username || self.email
+    @login || username || email
+  end
+
+  def full_name
+    "#{firstname} #{lastname}"
   end
 
   private

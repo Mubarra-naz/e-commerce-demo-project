@@ -10,11 +10,11 @@ class User < ApplicationRecord
   validates :username, uniqueness: true, presence: true, format: { with: /^(?=.*[a-z])|(?=.*[A-Z])|(?=.*[0-9])(?=.{3,30})/, multiline: true, message: "should be either uppercase, lowercase or numeric value" }
 
   def login
-    @login || self.username || self.email
+    @login || username || email
   end
 
   def full_name
-    "#{self.firstname} #{self.lastname}"
+    "#{firstname} #{lastname}"
   end
 
   private
@@ -24,6 +24,7 @@ class User < ApplicationRecord
     login = conditions.delete(:login)
     users = where(conditions)
     return users.find_by(["lower(username) = :value OR lower(email) = :value", { value: login.downcase }]) if login
+
     users.first if conditions[:username] || conditions[:email]
   end
 

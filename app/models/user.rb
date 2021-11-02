@@ -3,7 +3,6 @@ class User < ApplicationRecord
       :recoverable, :rememberable, :validatable, :confirmable
 
   attr_writer :login
-  attr_accessor :full_name
 
   validate :password_validation
   validates :firstname, :lastname, presence: true, format: { with: /^[a-zA-Z]{3,30}/, multiline: true, message: "should be either uppercase or lowercase alphabets only" }

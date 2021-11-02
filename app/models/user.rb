@@ -4,9 +4,13 @@ class User < ApplicationRecord
 
   attr_writer :login
 
+  enum role: [:user, :admin]
+
   validate :password_validation
   validates :firstname, :lastname, presence: true, format: { with: /^[a-zA-Z]{3,30}/, multiline: true, message: "should be either uppercase or lowercase alphabets only" }
   validates :username, uniqueness: true, presence: true, format: { with: /^(?=.*[a-z])|(?=.*[A-Z])|(?=.*[0-9])(?=.{3,30})/, multiline: true, message: "should be either uppercase, lowercase or numeric value" }
+
+  after_initialize :set_default_role, if: :new_record?
 
   def login
     @login || username || email
@@ -17,6 +21,10 @@ class User < ApplicationRecord
   end
 
   private
+
+  def set_default_role
+    self.role ||= :user
+  end
 
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup

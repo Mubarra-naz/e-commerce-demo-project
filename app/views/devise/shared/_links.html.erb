@@ -11,7 +11,7 @@
 <% end %>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' && controller_name != 'confirmations' %>
-  <%=link_to "New to site", "javascript:void(0)", class: 'sign-up-lnk'%><br>
+  <%= link_to "New to site", "javascript:void(0)", class: 'sign-up-lnk' %><br>
 <% end %>
 
 <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>

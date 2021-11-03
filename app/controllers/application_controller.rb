@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
+    return admin_users_path if resource.role=='admin'
     edit_user_registration_path
   end
 end

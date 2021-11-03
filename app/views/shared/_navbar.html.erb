@@ -11,19 +11,21 @@
           <%= link_to 'Users', admin_users_path, class: 'nav-link active' %>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Products</a>
+          <a class="nav-link disabled">Products</a>
         </li>
         <li class="nav-item">
           <a class="nav-link disabled">Coupon</a>
         </li>
       </ul>
+
       <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
-      <li class="nav-item">
-        <%= link_to 'Admin profile', '#', class: 'nav-link' %>
-      </li>
-      <li class="nav-item">
-        <%= link_to 'Log Out', destroy_user_session_path, method: :delete, class: 'nav-link' %>
-      </li>
+        <li class="nav-item">
+          <%= link_to 'Admin profile', '#', class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Log Out', destroy_user_session_path, method: :delete, class: 'nav-link' %>
+        </li>
+      </ul>
     </div>
 
   </div>

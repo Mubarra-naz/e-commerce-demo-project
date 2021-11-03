@@ -1,0 +1,30 @@
+<div class="container-fluid">
+  <table class="table table-bordered table-striped">
+    <thead class="bg-primary text-light">
+      <td>ID</td>
+      <td>First name</td>
+      <td>Last name</td>
+      <td>Username</td>
+      <td>Email</td>
+      <td>Role</td>
+      <td>Actions</td>
+    </thead>
+
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.id%></td>
+          <td><%= user.firstname%></td>
+          <td><%= user.lastname%></td>
+          <td><%= user.username%></td>
+          <td><%= user.email%></td>
+          <td><%= user.role%></td>
+          <td><%= link_to "View", admin_user_path(user), class: 'btn btn-success' %>
+            <%= link_to "Edit", edit_user_registration_path(user), class: 'btn btn-warning' %>
+            <%= link_to "Delete", admin_user_path(user), method: :delete, data: {confirm: "Are you sure"}, class: 'btn btn-danger' %>
+          </td>
+        </tr>
+      <%end%>
+    </tbody>
+  </table>
+</div>

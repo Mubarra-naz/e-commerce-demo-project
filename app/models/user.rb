@@ -4,7 +4,9 @@ class User < ApplicationRecord
 
   attr_writer :login
 
-  enum role: [:user, :admin]
+  USER = :user
+  ADMIN = :admin
+  ROLES = [USER, ADMIN]
 
   validate :password_validation
   validates :firstname, :lastname, presence: true, format: { with: /^[a-zA-Z]{3,30}/, multiline: true, message: "should be either uppercase or lowercase alphabets only" }
@@ -23,7 +25,7 @@ class User < ApplicationRecord
   private
 
   def set_default_role
-    self.role ||= :user
+    self.role ||= USER
   end
 
   def self.find_first_by_auth_conditions(warden_conditions)

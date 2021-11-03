@@ -4,8 +4,8 @@ class User < ApplicationRecord
 
   attr_writer :login
 
-  USER = :user
-  ADMIN = :admin
+  USER = 'user'
+  ADMIN = 'admin'
   ROLES = [USER, ADMIN]
 
   validate :password_validation

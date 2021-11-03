@@ -1,13 +1,12 @@
 class Admin::UsersController < ApplicationController
-  before_action :authenticate_user!
-  before_action :check_if_admin?
+  before_action :authenticate_user!, :check_if_admin?
 
   def index
-    @users=User.all
+    @users = User.all
   end
 
   def destroy
-    @user=User.find(params[:id])
+    @user = User.find(params[:id])
     @user.destroy
     redirect_to admin_root_path
   end
@@ -15,6 +14,6 @@ class Admin::UsersController < ApplicationController
   private
 
   def check_if_admin?
-    redirect_to new_session_path unless (current_user.role=='admin')
+    redirect_to new_session_path unless (current_user.role == 'admin')
   end
 end

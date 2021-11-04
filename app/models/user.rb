@@ -25,7 +25,9 @@ class User < ApplicationRecord
   end
 
   def confirmation_status
-    confirmed_at? ? "Confirmed" : "Unconfirmed"
+    return "Confirmed" if confirmed_at?
+
+    "Unconfirmed"
   end
 
   private

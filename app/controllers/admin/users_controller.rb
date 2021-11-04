@@ -6,11 +6,7 @@ class Admin::UsersController < Admin::AdminsController
   end
 
   def destroy
-    if @user.destroy
-      flash[:notice] = "User deleted successfully"
-    else
-      flash[:error] = "An unexpected error has it occurred"
-    end
+    @user.destroy ? flash[:notice] = "User deleted successfully" : flash[:error] = "An unexpected error has it occurred"
 
     redirect_to admin_root_path
   end

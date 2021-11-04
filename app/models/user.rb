@@ -13,7 +13,6 @@ class User < ApplicationRecord
   validate :password_validation
   validates :firstname, :lastname, presence: true, format: { with: /^[a-zA-Z]{3,30}/, multiline: true, message: "should be either uppercase or lowercase alphabets only" }
   validates :username, uniqueness: true, presence: true, format: { with: /^(?=.*[a-z])|(?=.*[A-Z])|(?=.*[0-9])(?=.{3,30})/, multiline: true, message: "should be either uppercase, lowercase or numeric value" }
-  # validates :role, inclusion: { in: ROLES }
 
   after_initialize :set_default_role, if: :new_record?
 

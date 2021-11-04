@@ -1,19 +1,23 @@
-class Admin::UsersController < ApplicationController
-  before_action :authenticate_user!, :check_if_admin?
+class Admin::UsersController < Admin::AdminsController
+  before_action :get_user, only: [:destroy]
 
   def index
     @users = User.all
   end
 
   def destroy
-    @user = User.find(params[:id])
-    @user.destroy
+    if @user.destroy
+      flash[:notice] = "User deleted successfully"
+    else
+      flash[:error] = "An unexpected error has it occurred"
+    end
+
     redirect_to admin_root_path
   end
 
   private
 
-  def check_if_admin?
-    redirect_to new_session_path unless current_user.role == User::ADMIN
+  def get_user
+    @user = User.find(params[:id])
   end
 end

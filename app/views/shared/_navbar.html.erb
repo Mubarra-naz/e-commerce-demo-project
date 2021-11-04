@@ -1,5 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light p-2 border-bottom border-primary">
   <div class="container-fluid">
+    <%= link_to 'My App', admin_root_path, class: 'navbar-brand text-primary fs-4 fw-bold' %>
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -7,22 +9,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <%= link_to 'Users', admin_users_path, class: 'nav-link active' %>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled">Products</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled">Coupon</a>
+          <%= link_to 'Users', admin_users_path, class: 'nav-link active text-primary' %>
         </li>
       </ul>
 
       <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <%= link_to 'Admin profile', '#', class: 'nav-link' %>
-        </li>
-        <li class="nav-item">
-          <%= link_to 'Log Out', destroy_user_session_path, method: :delete, class: 'nav-link' %>
+          <%= link_to 'Log Out', destroy_user_session_path, method: :delete, class: 'nav-link btn text-primary btn-outline-primary' %>
         </li>
       </ul>
     </div>

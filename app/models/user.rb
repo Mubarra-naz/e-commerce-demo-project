@@ -24,12 +24,6 @@ class User < ApplicationRecord
     "#{firstname} #{lastname}"
   end
 
-  def confirmation_status
-    return "Confirmed" if confirmed_at?
-
-    "Unconfirmed"
-  end
-
   private
 
   def set_default_role

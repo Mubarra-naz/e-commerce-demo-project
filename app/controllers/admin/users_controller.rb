@@ -1,19 +1,23 @@
 class Admin::UsersController < Admin::AdminsController
-  before_action :get_user, only: [:destroy]
+  before_action :set_user, only: :destroy
 
   def index
     @users = User.all
   end
 
   def destroy
-    @user.destroy ? flash[:notice] = "User deleted successfully" : flash[:error] = "An unexpected error has it occurred"
+    if @user.destroy
+      flash[:notice] = "User deleted successfully"
+    else
+      flash[:error] = @user.errors.full_messages.to_sentence
+    end
 
-    redirect_to admin_root_path
+    redirect_to admin_users_path
   end
 
   private
 
-  def get_user
+  def set_user
     @user = User.find(params[:id])
   end
 end

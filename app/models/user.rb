@@ -4,14 +4,16 @@ class User < ApplicationRecord
 
   attr_writer :login
 
-  USER = 'user'
-  ADMIN = 'admin'
-  ROLES = [USER, ADMIN]
+  USER = 'user'.freeze
+  ADMIN = 'admin'.freeze
+  ROLES = [USER, ADMIN].freeze
+
+  enum roles: ROLES
 
   validate :password_validation
   validates :firstname, :lastname, presence: true, format: { with: /^[a-zA-Z]{3,30}/, multiline: true, message: "should be either uppercase or lowercase alphabets only" }
   validates :username, uniqueness: true, presence: true, format: { with: /^(?=.*[a-z])|(?=.*[A-Z])|(?=.*[0-9])(?=.{3,30})/, multiline: true, message: "should be either uppercase, lowercase or numeric value" }
-  validates :role, inclusion: { in: ROLES }
+  validates :role, inclusion: { in: roles }
 
   after_initialize :set_default_role, if: :new_record?
 

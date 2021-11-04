@@ -18,13 +18,14 @@ class User < ApplicationRecord
 
   private
 
-  def self.find_for_database_authentication warden_condition
-    conditions = warden_condition.dup
+  def self.find_first_by_auth_conditions(warden_conditions)
+    conditions = warden_conditions.dup
     login = conditions.delete(:login)
     users = where(conditions)
     return users.find_by(["lower(username) = :value OR lower(email) = :value", { value: login.downcase }]) if login
+    return users.first if conditions[:username].blank?
 
-    users.first if conditions[:username] || conditions[:email]
+    find_by(username: conditions[:username])
   end
 
   def password_validation

@@ -1,5 +1,5 @@
 class Admin::AdminsController < ApplicationController
-  before_action :authenticate_user!, :authorize_admin
+  before_action :authorize_admin
 
   protected
 

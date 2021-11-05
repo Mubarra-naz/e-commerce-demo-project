@@ -3,9 +3,9 @@ class Admin::UsersController < Admin::AdminsController
 
   def index
     if params[:search].present?
-      @users = User.search_by_keys(params[:search])
+      @users = User.search_by_keys(params[:search]).page(params[:page]).per(5)
     else
-      @users = User.all
+      @users = User.all.page(params[:page]).per(5)
     end
   end
 

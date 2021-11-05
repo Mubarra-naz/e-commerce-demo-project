@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  include PgSearch::Model
+  pg_search_scope :search_by_keys, against: [:firstname, :lastname, :email, :id]
+
   devise :database_authenticatable, :registerable,
       :recoverable, :rememberable, :validatable, :confirmable
 

@@ -1,0 +1,15 @@
+<header class="py-3 mb-4 border-bottom border-primary">
+    <div class="container d-flex flex-wrap justify-content-center">
+      <div class="me-auto fs-3 fw-bold m-1">Users Database</div>
+
+      <%= form_with url: admin_users_path, html: { method: :get }, class: 'd-flex' do |f| %>
+        <div class="form-group mt-1">
+          <%= f.text_field :search, type: 'search', placeholder: 'Search Users', aria_label: 'Search', class: "form-control" %>
+        </div>
+
+        <div class="actions m-1">
+          <%= f.submit "Search", class: "btn btn-outline-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </header>

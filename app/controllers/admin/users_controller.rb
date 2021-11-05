@@ -2,7 +2,11 @@ class Admin::UsersController < Admin::AdminsController
   before_action :set_user, only: :destroy
 
   def index
-    @users = User.all
+    if params[:search].present?
+      @users = User.search_by_keys(params[:search])
+    else
+      @users = User.all
+    end
   end
 
   def destroy

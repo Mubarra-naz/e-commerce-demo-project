@@ -1,4 +1,6 @@
 class Admin::AdminsController < ApplicationController
+  require 'csv'
+
   before_action :authorize_admin
 
   protected

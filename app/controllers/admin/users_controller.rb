@@ -2,10 +2,20 @@ class Admin::UsersController < Admin::AdminsController
   before_action :set_user, only: :destroy
 
   def index
-    if params[:search].present?
-      @users = User.search_by_keys(params[:search]).page(params[:page]).per(5)
-    else
-      @users = User.all.page(params[:page]).per(5)
+    respond_to do |format|
+      format.html do
+        if params[:search].present?
+          @users = User.search_by_keys(params[:search]).page(params[:page]).per(5)
+        else
+          @users = User.all.page(params[:page]).per(5)
+        end
+      end
+
+      format.csv do
+        @users=User.all
+        headers['Content-Disposition'] = "attachment; filename=\"user-list\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
     end
   end
 

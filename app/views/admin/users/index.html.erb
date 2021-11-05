@@ -23,7 +23,8 @@
           <td><%= user.email %></td>
           <td><%= user.role %></td>
           <td><%= confirmation_status(user) %></td>
-          <td><%= link_to "View", admin_user_path(user), class: 'btn btn-success' %>
+          <td>
+            <%= link_to "View", admin_user_path(user), class: 'btn btn-success' %>
             <%= link_to "Edit", edit_user_registration_path(user), class: 'btn btn-warning' %>
             <%= link_to "Delete", admin_user_path(user), method: :delete, data: {confirm: "Are you sure"}, class: 'btn btn-danger' %>
           </td>

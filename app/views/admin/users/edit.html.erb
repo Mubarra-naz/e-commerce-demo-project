@@ -43,6 +43,7 @@
         </div>
       <% end %>
     </div>
+
     <div class="card-footer mt-3 bg-primary">
       <%= link_to "Back", 'javascript:history.back()', class: 'btn btn-warning px-3 mx-1' %>
       <%= link_to "Delete", admin_user_path(@user), method: :delete, data: {confirm: "Are you sure"}, class: 'btn btn-danger px-3 mx-1' %>

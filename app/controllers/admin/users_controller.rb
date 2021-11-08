@@ -1,13 +1,15 @@
 class Admin::UsersController < Admin::AdminsController
+  include SortHelper
+
   before_action :set_user, only: :destroy
 
   def index
     respond_to do |format|
       format.html do
         if params[:search].present?
-          @users = User.search_by_keys(params[:search]).page(params[:page]).per(5)
+          @users = User.search_by_keys(params[:search]).order(sort_column + " " + sort_direction).page(params[:page]).per(5)
         else
-          @users = User.all.page(params[:page]).per(5)
+          @users = User.order(sort_column + " " + sort_direction).page(params[:page]).per(5)
         end
       end
 

@@ -1,5 +1,7 @@
 class Admin::UsersController < Admin::AdminsController
-  before_action :set_user, only: :destroy
+  include SortHelper
+
+  before_action :set_user, except: :index
 
   def index
     respond_to do |format|
@@ -7,6 +9,8 @@ class Admin::UsersController < Admin::AdminsController
       format.csv { send_data CsvProcessor.new(User::CSV_HEADERS, 'User').generate, filename: "users-#{Date.today}.csv" }
     end
   end
+
+  def show; end
 
   def destroy
     if @user.destroy

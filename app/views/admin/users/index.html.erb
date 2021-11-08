@@ -4,18 +4,18 @@
 
   <table class="table table-bordered table-striped">
     <thead class="bg-primary text-light">
-      <td>ID</td>
-      <td>First name</td>
-      <td>Last name</td>
-      <td>Username</td>
-      <td>Email</td>
-      <td>Role</td>
-      <td>Status</td>
+      <td><%= sortable "id" %></td>
+      <td><%= sortable "firstname" %></td>
+      <td><%= sortable "lastname" %></td>
+      <td><%= sortable "username" %></td>
+      <td><%= sortable "email" %></td>
+      <td><%= sortable "role" %></td>
+      <td><%= sortable "confirmed_at", "Status" %></td>
       <td>Actions</td>
     </thead>
 
     <tbody>
-      <% @users.find_each do |user| %>
+      <% @users.each do |user| %><!-- Scoped order is ignored, it's forced to be batch order. -->
         <tr>
           <td><%= user.id %></td>
           <td><%= user.firstname %></td>

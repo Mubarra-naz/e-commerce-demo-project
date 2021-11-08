@@ -1,0 +1,30 @@
+<div class="container p-5">
+  <div class="card">
+    <div class="card-header bg-primary text-light">
+      <h2><%= @user.full_name.titleize %></h2>
+    </div>
+
+    <div class="card-body border-bottom border-3 border-primary">
+      <h5 class="card-title">First Name</h5>
+      <p class="card-text"><%= @user.firstname %></p>
+
+      <h5 class="card-title">Last Name</h5>
+      <p class="card-text"><%= @user.lastname %></p>
+
+      <h5 class="card-title">Username</h5>
+      <p class="card-text"><%= @user.username %></p>
+
+      <h5 class="card-title">Email</h5>
+      <p class="card-text"><%= @user.email %></p>
+
+      <h5 class="card-title">Status</h5>
+      <p class="card-text"><%= confirmation_status(@user) %></p>
+    </div>
+
+    <div class="card-footer bg-primary">
+      <%= link_to "Back", 'javascript:history.back()', class: 'btn btn-success px-3 mx-1' %>
+      <%= link_to "Edit", edit_user_registration_path(@user), class: 'btn btn-warning px-3 mx-1' %>
+      <%= link_to "Delete", admin_user_path(@user), method: :delete, data: {confirm: "Are you sure"}, class: 'btn btn-danger px-3 mx-1' %>
+    </div>
+  </div>
+</div>

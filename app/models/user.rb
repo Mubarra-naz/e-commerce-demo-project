@@ -15,7 +15,7 @@ class User < ApplicationRecord
 
   enum role: ROLES
 
-  validate :password_validation
+  validate :password_validation, if: :password
   validates :firstname, :lastname, presence: true, format: { with: /^[a-zA-Z]{3,30}/, multiline: true, message: "should be either uppercase or lowercase alphabets only" }
   validates :username, uniqueness: true, presence: true, format: { with: /^(?=.*[a-z])|(?=.*[A-Z])|(?=.*[0-9])(?=.{3,30})/, multiline: true, message: "should be either uppercase, lowercase or numeric value" }
 

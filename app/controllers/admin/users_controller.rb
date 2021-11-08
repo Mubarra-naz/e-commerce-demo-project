@@ -20,6 +20,8 @@ class Admin::UsersController < Admin::AdminsController
     end
   end
 
+  def show; end
+
   def destroy
     if @user.destroy
       flash[:notice] = "User deleted successfully"

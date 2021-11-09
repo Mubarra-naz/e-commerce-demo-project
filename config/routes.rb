@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     root 'devise/sessions#new'
   end
 
+  resource :user, only: :show
+
   namespace :admin do
     resources :users
   end

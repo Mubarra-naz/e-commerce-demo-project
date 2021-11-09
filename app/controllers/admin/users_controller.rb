@@ -47,7 +47,7 @@ class Admin::UsersController < Admin::AdminsController
     @user = User.find(params[:id])
   end
 
-def user_params
+  def user_params
     params.require(:user).permit(:firstname , :lastname, :username, :email, :password, :password_confirmation)
   end
 end

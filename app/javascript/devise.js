@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function(){
+$(document).ready(function(){
   $(".new-user-form").hide();
 
   $('.sign-up-lnk').on('click', function(){

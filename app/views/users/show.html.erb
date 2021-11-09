@@ -1,0 +1,25 @@
+<div class="container p-5">
+  <div class="card">
+    <div class="card-header bg-primary text-light">
+      <h2><%= current_user.full_name.titleize %></h2>
+    </div>
+
+    <div class="card-body border-bottom border-3 border-primary">
+      <h5 class="card-title">First Name</h5>
+      <p class="card-text"><%= current_user.firstname %></p>
+
+      <h5 class="card-title">Last Name</h5>
+      <p class="card-text"><%= current_user.lastname %></p>
+
+      <h5 class="card-title">Username</h5>
+      <p class="card-text"><%= current_user.username %></p>
+
+      <h5 class="card-title">Email</h5>
+      <p class="card-text"><%= current_user.email %></p>
+    </div>
+
+    <div class="card-footer bg-primary">
+      <%= link_to "Delete", registration_path(current_user), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger px-3 mx-1' %>
+    </div>
+  </div>
+</div>

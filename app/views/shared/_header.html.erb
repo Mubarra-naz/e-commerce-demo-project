@@ -1,21 +1,21 @@
 <header class="py-3 mb-4 border-bottom border-primary">
-   <div class="container d-flex flex-wrap justify-content-center">
-     <div class="me-auto d-flex m-1">
-       <h3 class="mt-1 me-4"><%= controller_name.classify %> Database</h3>
-       <%= link_to "New #{controller_name.classify}", { controller: params[:controller], action: :new }, class: "btn btn-success m-1" %>
-       <%= link_to 'Export to CSV', "#{controller_name}.csv", class: "btn btn-primary m-1" unless categories_controller? %>
-     </div>
+  <div class="container d-flex flex-wrap justify-content-center">
+    <div class="me-auto d-flex m-1">
+      <h3 class="mt-1 me-4"><%= controller_name.classify %> Database</h3>
+      <%= link_to "New #{controller_name.classify}", { controller: params[:controller], action: :new }, class: "btn btn-success m-1" %>
+      <%= link_to 'Export to CSV', "#{controller_name}.csv", class: "btn btn-primary m-1" unless categories_controller? %>
+    </div>
 
-     <% unless categories_controller? %>
-       <%= form_with url: controller_name, html: { method: :get }, class: 'd-flex' do |f| %>
-         <div class="form-group m-1">
-           <%= f.text_field :query, type: 'search', placeholder: "Search #{controller_name.classify}", aria_label: 'Search', class: "form-control" %>
-         </div>
+    <% unless categories_controller? %>
+      <%= form_with url: controller_name, html: { method: :get }, class: 'd-flex' do |f| %>
+        <div class="form-group m-1">
+          <%= f.text_field :query, type: 'search', placeholder: "Search #{controller_name.classify}", aria_label: 'Search', class: "form-control" %>
+        </div>
 
-         <div class="actions m-1">
-           <%= f.submit "Search", class: "btn btn-outline-primary" %>
-         </div>
-       <% end %>
-     <% end %>
-   </div>
+        <div class="actions m-1">
+          <%= f.submit "Search", class: "btn btn-outline-primary" %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
  </header>

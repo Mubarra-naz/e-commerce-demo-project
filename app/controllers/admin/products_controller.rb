@@ -2,7 +2,12 @@ class Admin::ProductsController < Admin::AdminsController
   before_action :set_product, except: [:index, :new, :create]
 
   def index
-    @products = Product.all
+    if params[:search].present?
+      @products = Product.all.search_products(params[:search])
+    else
+      @products=Product.all
+    end
+
   end
 
   def new

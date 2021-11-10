@@ -1,13 +1,14 @@
 class Admin::ProductsController < Admin::AdminsController
+  include SortHelper
+
   before_action :set_product, except: [:index, :new, :create]
 
   def index
     if params[:search].present?
-      @products = Product.all.search_products(params[:search])
+      @products = Product.all.search_products(params[:search]).order(sort_column + " " + sort_direction)
     else
-      @products=Product.all
+      @products=Product.order(sort_column + " " + sort_direction)
     end
-
   end
 
   def new

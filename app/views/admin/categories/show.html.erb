@@ -1,0 +1,18 @@
+<div class="container p-5">
+  <div class="card">
+    <div class="card-header bg-primary text-light">
+      <h2><%= @category.name.titleize %></h2>
+    </div>
+
+    <div class="card-body border-bottom border-3 border-primary">
+      <h5 class="card-title">ID</h5>
+      <p class="card-text"><%= @category.id %></p>
+
+      <h5 class="card-title">Name</h5>
+      <p class="card-text"><%= @category.name %></p>
+
+    <div class="card-footer bg-primary">
+      <%= render 'admin/shared/links', item: @category %>
+    </div>
+  </div>
+</div>

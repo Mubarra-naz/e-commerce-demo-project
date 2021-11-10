@@ -1,0 +1,15 @@
+<div class="container-fluid">
+  <%= render 'shared/header' %>
+
+  <table class="table table-bordered table-striped">
+    <thead class="bg-primary text-light">
+      <td>Id</td>
+      <td>Name</td>
+      <td>Actions</td>
+    </thead>
+
+    <tbody>
+      <%= render @categories %>
+    </tbody>
+  </table>
+</div>

@@ -19,7 +19,6 @@ class Admin::ProductsController < Admin::AdminsController
         headers['Content-Type'] ||= 'text/csv'
       end
     end
-
   end
 
   def new
@@ -42,8 +41,8 @@ class Admin::ProductsController < Admin::AdminsController
   def edit; end
 
   def update
-  if @product.update(product_params)
-    redirect_to admin_products_path, notice: "Updated product Successfully"
+    if @product.update(product_params)
+      redirect_to admin_products_path, notice: "Updated product Successfully"
     else
       flash.now[:notice]="Couldn't update."
       render 'edit'

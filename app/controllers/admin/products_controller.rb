@@ -5,9 +5,9 @@ class Admin::ProductsController < Admin::AdminsController
 
   def index
     if params[:search].present?
-      @products = Product.all.search_products(params[:search]).order(sort_column + " " + sort_direction)
+      @products = Product.all.search_products(params[:search]).order(sort_column + " " + sort_direction).page(params[:page]).per(5)
     else
-      @products=Product.order(sort_column + " " + sort_direction)
+      @products=Product.order(sort_column + " " + sort_direction).page(params[:page]).per(5)
     end
   end
 

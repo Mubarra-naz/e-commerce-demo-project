@@ -5,6 +5,7 @@
        <%= link_to "New #{controller_name.classify}", { controller: params[:controller], action: :new }, class: "btn btn-success m-1" %>
        <%= link_to 'Export to CSV', "#{controller_name}.csv", class: "btn btn-primary m-1" unless categories_controller? %>
      </div>
+
      <% unless categories_controller? %>
        <%= form_with url: controller_name, html: { method: :get }, class: 'd-flex' do |f| %>
          <div class="form-group m-1">

@@ -1,0 +1,25 @@
+<div class="container p-5">
+  <div class="card">
+    <div class="card-header bg-primary text-light">
+      <h2><%= @product.title.titleize %></h2>
+    </div>
+
+    <div class="card-body border-bottom border-3 border-primary">
+      <h5 class="card-title">Title</h5>
+      <p class="card-text"><%= @product.title %></p>
+
+      <h5 class="card-title">Price</h5>
+      <p class="card-text"><%= @product.price %></p>
+
+      <h5 class="card-title">Description</h5>
+      <p class="card-text"><%= @product.description %></p>
+
+      <h5 class="card-title">Status</h5>
+      <p class="card-text"><%= @product.status %></p>
+    </div>
+
+    <div class="card-footer bg-primary">
+      <%= render 'admin/shared/links', product: @product %>
+    </div>
+  </div>
+</div>

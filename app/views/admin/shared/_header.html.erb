@@ -1,11 +1,15 @@
 <header class="py-3 mb-4 border-bottom border-primary">
   <div class="container d-flex flex-wrap justify-content-center">
     <div class="me-auto d-flex m-1">
-      <h3 class="mt-1 me-4">Users Database</h3>
-      <%= link_to 'Export to CSV', admin_users_path(format: :csv), class: "btn btn-primary m-1" %>
+      <h3 class="mt-1 me-4"><%= controller_name.titleize %> Database</h3>
+
+      <%= link_to 'Export to CSV', controller_name+'.csv', class: "btn btn-primary m-1" %>
+      <% if params[:controller] == 'admin/products' %>
+      <%= link_to 'New Product', new_admin_product_path, class: "btn btn-success m-1" %>
+      <% end %>
     </div>
 
-    <%= form_with url: admin_users_path, html: { method: :get }, class: 'd-flex' do |f| %>
+    <%= form_with url: controller_name, html: { method: :get }, class: 'd-flex' do |f| %>
       <div class="form-group m-1">
         <%= f.text_field :query, type: 'search', placeholder: 'Search Users', aria_label: 'Search', class: "form-control" %>
       </div>

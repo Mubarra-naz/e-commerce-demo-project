@@ -4,8 +4,7 @@ module SortHelper
   DIRECTIONS = [ASC, DESC].freeze
 
   def sort_column
-    return  params[:sort] if User.column_names.include?(params[:sort])
-
+    return  params[:sort] if controller_name.classify.constantize.column_names.include?(params[:sort])
     "id"
   end
 

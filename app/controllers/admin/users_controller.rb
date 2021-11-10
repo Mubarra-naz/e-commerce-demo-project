@@ -2,7 +2,6 @@ class Admin::UsersController < Admin::AdminsController
   before_action :set_user, except: %i[index new create]
 
   def index
-    @model_name= 'User'
     respond_to do |format|
       format.html { @users = User.search(helpers.sort_column, helpers.sort_direction, params[:page], params[:query]) }
       format.csv { send_data CsvProcessor.new(User::CSV_HEADERS, 'User').generate, filename: "users-#{Date.today}.csv" }

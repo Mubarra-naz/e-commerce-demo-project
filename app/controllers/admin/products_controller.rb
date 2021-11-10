@@ -4,11 +4,22 @@ class Admin::ProductsController < Admin::AdminsController
   before_action :set_product, except: [:index, :new, :create]
 
   def index
-    if params[:search].present?
-      @products = Product.all.search_products(params[:search]).order(sort_column + " " + sort_direction).page(params[:page]).per(5)
-    else
-      @products=Product.order(sort_column + " " + sort_direction).page(params[:page]).per(5)
+    respond_to do |format|
+      format.html do
+        if params[:search].present?
+          @products = Product.all.search_products(params[:search]).order(sort_column + " " + sort_direction).page(params[:page]).per(5)
+        else
+          @products=Product.order(sort_column + " " + sort_direction).page(params[:page]).per(5)
+        end
+      end
+
+      format.csv do
+        @products=Product.all
+        headers['Content-Disposition'] = "attachment; filename=\"product-list\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
     end
+
   end
 
   def new

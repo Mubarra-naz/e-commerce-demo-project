@@ -12,5 +12,6 @@ Rails.application.routes.draw do
     resources :users
     resources :products
     resources :categories
+    resources :coupons
   end
 end

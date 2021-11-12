@@ -7,6 +7,8 @@ class Product < ApplicationRecord
 
   belongs_to :category
 
+  belongs_to :category
+
   has_rich_text :description
   has_and_belongs_to_many :coupons
   has_many_attached :images

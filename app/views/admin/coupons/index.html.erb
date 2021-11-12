@@ -1,0 +1,18 @@
+<div class="container-fluid">
+  <%= render 'shared/header' %>
+
+  <table class="table table-bordered table-striped">
+    <thead class="bg-primary text-light">
+      <td><%= sortable "id" %></td>
+      <td><%= sortable "name" %></td>
+      <td><%= sortable "discount", "Discount Value" %></td>
+      <td><%= sortable "discount_type" %></td>
+      <td>Actions</td>
+    </thead>
+
+    <tbody>
+      <%= render @coupons %>
+    </tbody>
+  </table>
+  <%= paginate @coupons%>
+</div>

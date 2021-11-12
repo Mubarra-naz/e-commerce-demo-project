@@ -1,0 +1,18 @@
+<div class="container p-5">
+  <div class="card">
+    <div class="card-header bg-primary text-light">
+      <h2><%= @coupon.name.titleize %></h2>
+    </div>
+
+    <div class="card-body border-bottom border-3 border-primary">
+      <h5 class="card-title">Name</h5>
+      <p class="card-text"><%= @coupon.name %></p>
+
+      <h5 class="card-title">Discount Value</h5>
+      <p class="card-text"><%= @coupon.discount %></p>
+
+    <div class="card-footer bg-primary">
+      <%= render 'admin/shared/links', item: @coupon %>
+    </div>
+  </div>
+</div>

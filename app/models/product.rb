@@ -3,6 +3,8 @@ class Product < ApplicationRecord
   include PgSearch::Model
   pg_search_scope :search_by_keys, against: %i[title status id]
 
+  belongs_to :category
+
   has_rich_text :description
 
   PUBLISH = 'published'.freeze

@@ -2,7 +2,7 @@ class Admin::CategoriesController < Admin::AdminsController
   before_action :set_category, except: [:index, :new, :create]
 
   def index
-  @categories=Category.all
+    @categories=Category.all
   end
 
   def new

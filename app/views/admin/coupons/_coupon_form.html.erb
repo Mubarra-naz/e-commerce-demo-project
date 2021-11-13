@@ -13,8 +13,13 @@
     </div>
 
     <div class="form-group mt-2">
-      <%= f.label :discount_type, class: "form-label" %>,
+      <%= f.label :discount_type, class: "form-label" %>
       <%= f.select :discount_type, Coupon::TYPE, {}, { class: "form-control" } %>
+    </div>
+
+    <div class="form-group mt-2">
+      <%= f.label :category_ids, value: 'Products Categories', class: "form-label" %>
+      <%= f.select :category_ids, select_options('category','name'), {}, multiple: true, class: "form-control js-example-basic-multiple prod" %>
     </div>
 
     <%= f.submit class:"btn mt-4 px-3 btn-primary " %>

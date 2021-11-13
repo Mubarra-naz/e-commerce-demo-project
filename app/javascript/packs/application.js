@@ -13,4 +13,6 @@ require("channels");
 require("devise.js");
 import $ from 'jquery';
 global.$ = jQuery;
-
+require("select2");
+import 'select2/dist/css/select2.css';
+require("dropdown.js");

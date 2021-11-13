@@ -11,6 +11,15 @@
       <h5 class="card-title">Discount Value</h5>
       <p class="card-text"><%= @coupon.discount %></p>
 
+      <h5 class="card-title">Discounted Product Categories</h5>
+      <p class="card-text">
+        <% @coupon.categories.each do |category|  %>
+          <ul>
+            <li><%= category.name %></li>
+          </ul>
+        <% end %>
+      </p>
+
     <div class="card-footer bg-primary">
       <%= render 'admin/shared/links', item: @coupon %>
     </div>

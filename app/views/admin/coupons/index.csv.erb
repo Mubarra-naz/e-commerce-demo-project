@@ -1,5 +1,5 @@
-<%- headers = ['ID', 'Name', 'Discount Value'] -%>
+<%- headers = ['ID', 'Name', 'Discount Value', 'Discount Type'] -%>
 <%= CSV.generate_line headers -%>
 <%- @coupons.find_each do |coupon| -%>
-  <%= CSV.generate_line([coupon.id, coupon.name, coupon.discount]) -%>
+  <%= CSV.generate_line([coupon.id, coupon.name, coupon.discount, coupon.discount_type]) -%>
 <%- end -%>

@@ -59,6 +59,11 @@ ActiveRecord::Schema.define(version: 2021_11_21_111032) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "categories_coupons", id: false, force: :cascade do |t|
+    t.bigint "category_id", null: false
+    t.bigint "coupon_id", null: false
+  end
+
   create_table "coupons", force: :cascade do |t|
     t.string "name"
     t.decimal "discount"

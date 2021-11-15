@@ -64,4 +64,3 @@ gem 'pg_search'
 gem 'kaminari', git: 'https://github.com/kaminari/kaminari'
 
 gem 'actiontext'
-

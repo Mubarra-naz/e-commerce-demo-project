@@ -1,0 +1,33 @@
+<div class="container p-5">
+  <div class="card">
+    <div class="card-header bg-primary text-light">
+      <h2><%= @product.title.titleize %></h2>
+    </div>
+
+    <div class="card-body border-bottom border-3 border-primary d-flex justify-content-between overflow-hidden">
+      <div>
+        <h5 class="card-title">Title</h5>
+        <p class="card-text"><%= @product.title %></p>
+
+        <h5 class="card-title">Price</h5>
+        <p class="card-text"><%= @product.price %></p>
+
+        <h5 class="card-title">Description</h5>
+        <p class="card-text"><%= @product.description %></p>
+
+        <h5 class="card-title">Category</h5>
+        <p class="card-text"><%= @product.category.name %></p>
+      </div>
+
+      <div class="row mb-2">
+        <% @product.images.each do |img| %>
+            <%= image_tag img, class: 'm-auto img-thumbnail' %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="card-footer bg-primary">
+      <%= link_to 'Add to Cart', '#', class: 'btn btn-success px-3 mx-1' %>
+    </div>
+  </div>
+</div>

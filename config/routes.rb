@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   end
 
   resource :user, only: :show
+  resources :products
 
   namespace :admin do
     resources :users

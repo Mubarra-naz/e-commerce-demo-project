@@ -1,0 +1,14 @@
+<div class="col-4 p-3">
+  <div class="card">
+    <%= image_tag product.images.first, class: 'img-thumbnail w-100' %>
+    <div class="card-body">
+      <h3 class="card-title fs-bold"><%= product.title.titleize %></h3>
+      <p class="card-text"><%= product.category.name.titleize %></p>
+      <p>$<%= product.price %></p>
+    </div>
+    <div class="card-footer d-flex justify-content-between">
+      <%= link_to 'Add to Cart', '#' %>
+      <%= link_to 'Details', product_path(product) %>
+    </div>
+  </div>
+</div>

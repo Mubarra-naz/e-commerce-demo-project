@@ -5,6 +5,13 @@
     </div>
 
     <div class="card-body border-bottom border-3 border-primary">
+      <h5 class="card-title">Images</h5>
+      <div class="d-row mb-2">
+        <% @product.images.each do |img| %>
+            <%= image_tag img, class: 'm-auto img-thumbnail' %>
+        <% end %>
+      </div>
+
       <h5 class="card-title">Title</h5>
       <p class="card-text"><%= @product.title %></p>
 
@@ -19,6 +26,7 @@
 
       <h5 class="card-title">Category</h5>
       <p class="card-text"><%= @product.category.name %></p>
+
     </div>
 
     <div class="card-footer bg-primary">

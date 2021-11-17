@@ -2,7 +2,7 @@ class Admin::CategoriesController < Admin::AdminsController
   before_action :set_category, except: [:index, :new, :create]
 
   def index
-    @categories=Category.all
+    @categories = Category.all
   end
 
   def new
@@ -15,7 +15,7 @@ class Admin::CategoriesController < Admin::AdminsController
     if @category.save
       redirect_to admin_categories_path, notice: "Created Category Successfully"
     else
-      flash.now[:notice]="Couldn't create"
+      flash.now[:notice] = "Couldn't create"
       render 'new'
     end
   end
@@ -28,7 +28,7 @@ class Admin::CategoriesController < Admin::AdminsController
     if @category.update(category_params)
       redirect_to admin_categories_path, notice: "Updated category Successfully"
     else
-      flash.now[:notice]="Couldn't update."
+      flash.now[:notice] = "Couldn't update."
       render 'edit'
     end
   end

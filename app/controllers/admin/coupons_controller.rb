@@ -5,19 +5,8 @@ class Admin::CouponsController < Admin::AdminsController
 
   def index
     respond_to do |format|
-      format.html do
-        if params[:search].present?
-          @coupons = Coupon.all.search_coupons(params[:search]).order(sort_column + " " + sort_direction).page(params[:page]).per(5)
-        else
-          @coupons=Coupon.order(sort_column + " " + sort_direction).page(params[:page]).per(5)
-        end
-      end
-
-      format.csv do
-        @coupons=Coupon.all
-        headers['Content-Disposition'] = "attachment; filename=\"coupon-list\""
-        headers['Content-Type'] ||= 'text/csv'
-      end
+      format.html { search_coupons }
+      format.csv { export_csv }
     end
   end
 
@@ -60,6 +49,19 @@ class Admin::CouponsController < Admin::AdminsController
   end
 
   private
+
+  def export_csv
+    headers['Content-Disposition'] = "attachment; filename=\"coupon-list\""
+    headers['Content-Type'] ||= 'text/csv'
+  end
+
+  def search_coupons
+    if params[:search].present?
+      @coupons = Coupon.all.search_coupons(params[:search]).order(sort_column + " " + sort_direction).page(params[:page]).per(5)
+    else
+      @coupons = Coupon.order(sort_column + " " + sort_direction).page(params[:page]).per(5)
+    end
+  end
 
   def set_coupon
     @coupon = Coupon.find(params[:id])

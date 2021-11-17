@@ -20,6 +20,11 @@ class Admin::UsersController < Admin::AdminsController
 
   private
 
+  def export_csv
+    headers['Content-Disposition'] = "attachment; filename=\"user-list\""
+    headers['Content-Type'] ||= 'text/csv'
+  end
+
   def set_user
     @user = User.find(params[:id])
   end

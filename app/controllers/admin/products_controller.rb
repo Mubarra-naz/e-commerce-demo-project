@@ -5,19 +5,8 @@ class Admin::ProductsController < Admin::AdminsController
 
   def index
     respond_to do |format|
-      format.html do
-        if params[:search].present?
-          @products = Product.all.search_products(params[:search]).order(sort_column + " " + sort_direction).page(params[:page]).per(5)
-        else
-          @products=Product.order(sort_column + " " + sort_direction).page(params[:page]).per(5)
-        end
-      end
-
-      format.csv do
-        @products=Product.all
-        headers['Content-Disposition'] = "attachment; filename=\"product-list\""
-        headers['Content-Type'] ||= 'text/csv'
-      end
+      format.html { search_products }
+      format.csv { export_csv }
     end
   end
 
@@ -31,7 +20,7 @@ class Admin::ProductsController < Admin::AdminsController
     if @product.save
       redirect_to admin_products_path, notice: "Created Product Successfully"
     else
-      flash.now[:notice]="Couldn't create"
+      flash.now[:notice] = "Couldn't create"
       render 'new'
     end
   end
@@ -44,7 +33,7 @@ class Admin::ProductsController < Admin::AdminsController
     if @product.update(product_params)
       redirect_to admin_products_path, notice: "Updated product Successfully"
     else
-      flash.now[:notice]="Couldn't update."
+      flash.now[:notice] = "Couldn't update."
       render 'edit'
     end
   end
@@ -60,6 +49,19 @@ class Admin::ProductsController < Admin::AdminsController
   end
 
   private
+
+  def search_products
+    if params[:search].present?
+      @products = Product.all.search_products(params[:search]).order(sort_column + " " + sort_direction).page(params[:page]).per(5)
+    else
+      @products = Product.order(sort_column + " " + sort_direction).page(params[:page]).per(5)
+    end
+  end
+
+  def export_csv
+    headers['Content-Disposition'] = "attachment; filename=\"product-list\""
+    headers['Content-Type'] ||= 'text/csv'
+  end
 
   def set_product
     @product = Product.find(params[:id])

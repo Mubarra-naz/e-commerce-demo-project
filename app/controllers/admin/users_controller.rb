@@ -5,19 +5,8 @@ class Admin::UsersController < Admin::AdminsController
 
   def index
     respond_to do |format|
-      format.html do
-        if params[:search].present?
-          @users = User.search_by_keys(params[:search]).order(sort_column + " " + sort_direction).page(params[:page]).per(5)
-        else
-          @users = User.order(sort_column + " " + sort_direction).page(params[:page]).per(5)
-        end
-      end
-
-      format.csv do
-        @users=User.all
-        headers['Content-Disposition'] = "attachment; filename=\"user-list\""
-        headers['Content-Type'] ||= 'text/csv'
-      end
+      format.html { @users = User.search(sort_column, sort_direction, params[:page], params[:query]) }
+      format.csv { send_data CsvGenerator.new(%i[id full_name username email role confirmation_status], 'User').file_generator, filename: "user-#{Date.today}.csv" }
     end
   end
 

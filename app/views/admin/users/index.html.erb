@@ -15,7 +15,7 @@
     </thead>
 
     <tbody>
-      <% @users.each do |user| %><!-- Scoped order is ignored, it's forced to be batch order. -->
+      <% @users.each do |user| %>
         <tr>
           <td><%= user.id %></td>
           <td><%= user.firstname %></td>
@@ -23,7 +23,7 @@
           <td><%= user.username %></td>
           <td><%= user.email %></td>
           <td><%= user.role %></td>
-          <td><%= confirmation_status(user) %></td>
+          <td><%= user.confirmation_status %></td>
           <td>
             <%= link_to "View", admin_user_path(user), class: 'btn btn-success' %>
             <%= link_to "Edit", edit_user_registration_path(user), class: 'btn btn-warning' %>

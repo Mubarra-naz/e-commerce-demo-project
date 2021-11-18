@@ -26,7 +26,7 @@ class User < ApplicationRecord
   end
 
   def full_name
-    "#{firstname} #{lastname}"
+    "#{firstname} #{lastname}".titleize
   end
 
   def confirmation_status

@@ -1,7 +1,7 @@
 <div class="container p-5">
   <div class="card">
     <div class="card-header bg-primary text-light">
-      <h2><%= @user.full_name.titleize %></h2>
+      <h2><%= @user.full_name %></h2>
     </div>
 
     <div class="card-body border-bottom border-3 border-primary">
@@ -18,7 +18,7 @@
       <p class="card-text"><%= @user.email %></p>
 
       <h5 class="card-title">Status</h5>
-      <p class="card-text"><%= confirmation_status(@user) %></p>
+      <p class="card-text"><%= @user.confirmation_status %></p>
     </div>
 
     <div class="card-footer bg-primary">

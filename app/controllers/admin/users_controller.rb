@@ -15,13 +15,15 @@ class Admin::UsersController < Admin::AdminsController
   def edit; end
 
   def update
-    params[:user].delete(:password) if params[:user][:password].blank?
-    params[:user].delete(:password_confirmation) if params[:user][:password].blank? and params[:user][:password_confirmation].blank?
-
-    if @user.update(user_params)
-    redirect_to admin_users_path, notice: "Updated Successfully"
+    if params.dig(:user, :password).blank?
+      updated = @user.update_without_password(user_params.to_unsafe_hash)
     else
-      flash.now[:notice]="Couldn't update."
+      updated = @user.update(user_params)
+    end
+    if updated
+      redirect_to admin_users_path, notice: "Updated Successfully"
+    else
+      flash.now[:notice] = "Couldn't update."
       render 'edit'
     end
   end
@@ -38,16 +40,11 @@ class Admin::UsersController < Admin::AdminsController
 
   private
 
-  def export_csv
-    headers['Content-Disposition'] = "attachment; filename=\"user-list\""
-    headers['Content-Type'] ||= 'text/csv'
-  end
-
   def set_user
     @user = User.find(params[:id])
   end
 
   def user_params
-    params.require(:user).permit(:firstname , :lastname, :username, :email, :password, :password_confirmation)
+    params.require(:user).permit(:firstname, :lastname, :username, :email, :password, :password_confirmation)
   end
 end

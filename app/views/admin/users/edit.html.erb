@@ -6,6 +6,8 @@
 
     <div class="card-body border-bottom border-3 border-primary">
       <%= form_for [:admin, @user] do |f| %>
+        <%= render 'admin/shared/errors', item: @user %>
+
         <div class="form-group mt-2">
           <%= f.label :firstname, value: "First name", class: "form-label" %>
           <%= f.text_field :firstname, autofocus: true, class: "form-control" %>
@@ -32,13 +34,15 @@
         </div>
 
         <div class="form-group mt-2">
-          <%= f.label :password_confirmation, class: "form-label" %><br />
+          <%= f.label :password_confirmation, class: "form-label" %>
           <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
         </div>
 
-    <div class="card-footer mt-3 bg-primary">
-        <%= f.submit "Update", class: "btn mx-1 px-3 btn-success" %>
+        <div class="actions mt-2">
+          <%= f.submit "Update", class: "btn mx-1 px-3 btn-success" %>
+        </div>
       <% end %>
+    <div class="card-footer mt-3 bg-primary">
 
       <%= link_to "Back", 'javascript:history.back()', class: 'btn btn-warning px-3 mx-1' %>
       <%= link_to "Delete", admin_user_path(@user), method: :delete, data: {confirm: "Are you sure"}, class: 'btn btn-danger px-3 mx-1' %>

@@ -1,5 +1,6 @@
 class CsvProcessor
   require 'csv'
+
   def initialize(arr, model_name)
     @attributes = arr
     @model_name = model_name

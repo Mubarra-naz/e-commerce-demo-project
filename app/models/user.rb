@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  extend Indexable
+  extend Searchable
   include PgSearch::Model
   pg_search_scope :search_by_keys, against: %i[firstname lastname email id]
 
@@ -11,6 +11,7 @@ class User < ApplicationRecord
   USER = 'user'.freeze
   ADMIN = 'admin'.freeze
   ROLES = {user: USER, admin: ADMIN}.freeze
+  CSVHEADERS = %i[id full_name username email role confirmation_status]
 
   enum role: ROLES
 

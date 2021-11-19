@@ -1,4 +1,4 @@
-module Indexable
+module Searchable
   extend ActiveSupport::Concern
 
   def search(column, direction, page, query, items=5)

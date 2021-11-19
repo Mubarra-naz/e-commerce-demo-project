@@ -1,7 +1,7 @@
 module SortHelper
   ASC = 'asc'.freeze
   DESC = 'desc'.freeze
-  DIRECTIONS = [ ASC, DESC ].freeze
+  DIRECTIONS = [ASC, DESC].freeze
 
   def sort_column
     return  params[:sort] if User.column_names.include?(params[:sort])

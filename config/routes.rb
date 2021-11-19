@@ -26,6 +26,8 @@ Rails.application.routes.draw do
         patch 'customer_info'
       end
     end
+
+    resources :checkout
   end
 
   resources :products, only: [:index, :show]

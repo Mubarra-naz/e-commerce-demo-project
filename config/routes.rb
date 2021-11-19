@@ -17,6 +17,8 @@ Rails.application.routes.draw do
     resources :line_items do
       post 'update_quantity', on: :member, defaults: { format: :json }
     end
+
+    resources :checkout
   end
 
   resources :products, only: [:index, :show]

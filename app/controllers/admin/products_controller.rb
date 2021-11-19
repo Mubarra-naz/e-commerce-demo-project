@@ -1,12 +1,10 @@
 class Admin::ProductsController < Admin::AdminsController
-  include SortHelper
-
-  before_action :set_product, except: [:index, :new, :create]
+  before_action :set_product, except: %i[index new create]
 
   def index
     respond_to do |format|
-      format.html { search_products }
-      format.csv { export_csv }
+      format.html { @products = Product.search(helpers.sort_column, helpers.sort_direction, params[:page], params[:query]) }
+      format.csv { send_data CsvProcessor.new(Product::CSV_HEADERS, 'Product').generate, filename: "products-#{Date.today}.csv" }
     end
   end
 
@@ -20,7 +18,6 @@ class Admin::ProductsController < Admin::AdminsController
     if @product.save
       redirect_to admin_products_path, notice: "Created Product Successfully"
     else
-      flash.now[:notice] = "Couldn't create"
       render 'new'
     end
   end
@@ -33,7 +30,6 @@ class Admin::ProductsController < Admin::AdminsController
     if @product.update(product_params)
       redirect_to admin_products_path, notice: "Updated product Successfully"
     else
-      flash.now[:notice] = "Couldn't update."
       render 'edit'
     end
   end
@@ -49,19 +45,6 @@ class Admin::ProductsController < Admin::AdminsController
   end
 
   private
-
-  def search_products
-    if params[:search].present?
-      @products = Product.all.search_products(params[:search]).order(sort_column + " " + sort_direction).page(params[:page]).per(5)
-    else
-      @products = Product.order(sort_column + " " + sort_direction).page(params[:page]).per(5)
-    end
-  end
-
-  def export_csv
-    headers['Content-Disposition'] = "attachment; filename=\"product-list\""
-    headers['Content-Type'] ||= 'text/csv'
-  end
 
   def set_product
     @product = Product.find(params[:id])

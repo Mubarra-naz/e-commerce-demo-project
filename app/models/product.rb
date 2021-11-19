@@ -9,11 +9,15 @@ class Product < ApplicationRecord
   DRAFT = 'draft'.freeze
   PENDING = 'pending'.freeze
   STATUS = {published: PUBLISH, draft: DRAFT, pending: PENDING}.freeze
-  CSV_HEADERS = %i[id title price status]
+  CSV_HEADERS = %i[id title price status].freeze
 
   enum status: STATUS
 
   validates :title, presence: true
   validates :price, presence: true, numericality: true
   validates :description, length: { minimum: 15 }
+
+  def titleized
+    title.titleize
+  end
 end

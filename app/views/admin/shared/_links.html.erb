@@ -2,11 +2,11 @@
   <%= link_to "View", { controller: params[:controller], action: :show, id: item }, class: 'btn btn-success' %>
 <% end %>
 
-<% if params[:action] != 'index' %>
+<% unless params[:action] == 'index' %>
   <%= link_to "Back", 'javascript:history.back()', class: 'btn btn-success px-3 mx-1' %>
 <% end %>
 
-<% if params[:action] != 'edit' %>
+<% unless params[:action] == 'edit' %>
   <%= link_to "Edit", { controller: params[:controller], action: :edit, id: item }, class: 'btn btn-warning px-3 mx-1' %>
 <% end %>
 

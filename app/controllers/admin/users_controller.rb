@@ -1,6 +1,4 @@
 class Admin::UsersController < Admin::AdminsController
-  include SortHelper
-
   before_action :set_user, except: :index
 
   def index
@@ -15,15 +13,9 @@ class Admin::UsersController < Admin::AdminsController
   def edit; end
 
   def update
-    if params.dig(:user, :password).blank?
-      updated = @user.update_without_password(user_params.to_unsafe_hash)
-    else
-      updated = @user.update(user_params)
-    end
-    if updated
+    if updated?
       redirect_to admin_users_path, notice: "Updated Successfully"
     else
-      flash.now[:notice] = "Couldn't update."
       render 'edit'
     end
   end
@@ -39,6 +31,12 @@ class Admin::UsersController < Admin::AdminsController
   end
 
   private
+
+  def updated?
+    return @user.update_without_password(user_params) if params.dig(:user, :password).blank?
+
+    @user.update(user_params)
+  end
 
   def set_user
     @user = User.find(params[:id])

@@ -1,6 +1,7 @@
 class Product < ApplicationRecord
+  extend Searchable
   include PgSearch::Model
-  pg_search_scope :search_products, against: [:title, :status, :id]
+  pg_search_scope :search_by_keys, against: %i[title status id]
 
   has_rich_text :description
 
@@ -8,6 +9,7 @@ class Product < ApplicationRecord
   DRAFT = 'draft'.freeze
   PENDING = 'pending'.freeze
   STATUS = {published: PUBLISH, draft: DRAFT, pending: PENDING}.freeze
+  CSV_HEADERS = %i[id title price status]
 
   enum status: STATUS
 

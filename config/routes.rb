@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     resources :line_items do
       post 'update_qty', on: :member
     end
+
+    resources :checkout
   end
 
   resources :products, only: [:index, :show]

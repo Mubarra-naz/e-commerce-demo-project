@@ -3,8 +3,4 @@ module ApplicationHelper
     symbol = attribute.to_sym
     model_name.classify.constantize.all.map{ |item| [item[symbol], item[:id]] }
   end
-
-  def categories_controller
-    controller_name == 'categories'
-  end
 end

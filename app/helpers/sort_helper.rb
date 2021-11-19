@@ -19,10 +19,10 @@ module SortHelper
     title = title.presence || column.titleize
     if column == sort_column && sort_direction == ASC
       direction = DESC
-      bs_class= 'dropup'
+      bs_class = 'dropup'
     else
       direction = ASC
-      bs_class= 'dropdown'
+      bs_class = 'dropdown'
     end
 
     col_tag = link_to title, {sort: column, direction: direction}, {class: "link-light dropdown-toggle"}

@@ -4,7 +4,7 @@ class Admin::UsersController < Admin::AdminsController
   def index
     respond_to do |format|
       format.html { @users = User.search(helpers.sort_column, helpers.sort_direction, params[:page], params[:query]) }
-      format.csv { send_data CsvProcessor.new(User::CSVHEADERS, 'User').generate, filename: "users-#{Date.today}.csv" }
+      format.csv { send_data CsvProcessor.new(User::CSV_HEADERS, 'User').generate, filename: "users-#{Date.today}.csv" }
     end
   end
 

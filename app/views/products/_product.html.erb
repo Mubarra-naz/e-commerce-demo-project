@@ -7,7 +7,7 @@
       <p>$<%= product.price %></p>
     </div>
     <div class="card-footer d-flex justify-content-between">
-      <%= link_to 'Add to Cart', '#' %>
+      <%= link_to 'Add to Cart', user_line_items_path(product_id: product), method: :post %>
       <%= link_to 'Details', product_path(product) %>
     </div>
   </div>

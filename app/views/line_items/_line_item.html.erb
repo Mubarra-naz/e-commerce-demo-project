@@ -1,0 +1,11 @@
+<tr>
+  <td><%= line_item.product.title %></td>
+  <td><%= line_item.product.price %></td>
+  <td>
+    <%= number_field_tag 'quantity',line_item.quantity, id: line_item.id, class: 'item' %>
+  </td>
+  <td><%= total_price(line_item) %></td>
+  <td>
+    <%= link_to "Remove", user_line_item_path(line_item), method: :delete, data: { confirm: "Are you sure" }, class: 'btn btn-warning px-3 mx-1' %>
+  </td>
+</tr>

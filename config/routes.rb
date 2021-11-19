@@ -6,8 +6,12 @@ Rails.application.routes.draw do
     root 'devise/sessions#new'
   end
 
-  resource :user, only: :show
-  resources :products
+  resource :user, only: :show do
+    resource :cart
+    resources :line_items
+    post '/update_qty', to: 'line_items#update_qty'
+  end
+  resources :products, only: [:index, :show]
 
   namespace :admin do
     resources :users

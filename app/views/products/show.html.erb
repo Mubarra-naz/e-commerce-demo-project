@@ -27,7 +27,7 @@
     </div>
 
     <div class="card-footer bg-primary">
-      <%= link_to 'Add to Cart', '#', class: 'btn btn-success px-3 mx-1' %>
+      <%= link_to 'Add to Cart', user_line_items_path(product_id: @product), method: :post, class: 'btn btn-success px-3 mx-1' %>
     </div>
   </div>
 </div>

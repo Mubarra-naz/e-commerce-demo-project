@@ -6,6 +6,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
       :recoverable, :rememberable, :validatable, :confirmable
 
+  has_one :cart, dependent: :destroy
+
   attr_writer :login
 
   USER = 'user'.freeze

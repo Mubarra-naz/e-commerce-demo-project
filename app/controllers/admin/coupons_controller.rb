@@ -68,6 +68,6 @@ class Admin::CouponsController < Admin::AdminsController
   end
 
   def coupon_params
-    params.require(:coupon).permit(:name, :discount, :discount_type, category_ids: [])
+    params.require(:coupon).permit(:name, :discount, :discount_type, product_ids: [])
   end
 end

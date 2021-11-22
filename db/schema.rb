@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_12_074343) do
+ActiveRecord::Schema.define(version: 2021_11_21_111032) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,17 +59,28 @@ ActiveRecord::Schema.define(version: 2021_11_12_074343) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "categories_coupons", id: false, force: :cascade do |t|
-    t.bigint "category_id", null: false
-    t.bigint "coupon_id", null: false
-  end
-
   create_table "coupons", force: :cascade do |t|
     t.string "name"
     t.decimal "discount"
     t.string "discount_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "coupons_products", id: false, force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "coupon_id", null: false
+    t.index ["coupon_id", "product_id"], name: "index_coupons_products_on_coupon_id_and_product_id"
+    t.index ["product_id", "coupon_id"], name: "index_coupons_products_on_product_id_and_coupon_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.decimal "price"
+    t.bigint "user_id", null: false
+    t.integer "items"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "products", force: :cascade do |t|

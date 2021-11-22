@@ -66,11 +66,6 @@ ActiveRecord::Schema.define(version: 2021_11_26_134322) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "categories_coupons", id: false, force: :cascade do |t|
-    t.bigint "category_id", null: false
-    t.bigint "coupon_id", null: false
-  end
-
   create_table "coupons", force: :cascade do |t|
     t.string "name"
     t.decimal "discount"
@@ -125,6 +120,15 @@ ActiveRecord::Schema.define(version: 2021_11_26_134322) do
     t.index ["product_id"], name: "index_line_items_on_product_id"
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.decimal "price"
+    t.bigint "user_id", null: false
+    t.integer "items"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "title"
     t.decimal "price"
@@ -171,5 +175,6 @@ ActiveRecord::Schema.define(version: 2021_11_26_134322) do
   add_foreign_key "carts", "users"
   add_foreign_key "line_items", "carts"
   add_foreign_key "line_items", "products"
+  add_foreign_key "orders", "users"
   add_foreign_key "products", "categories"
 end

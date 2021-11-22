@@ -121,6 +121,15 @@ ActiveRecord::Schema.define(version: 2021_12_01_050520) do
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.decimal "price"
+    t.bigint "user_id", null: false
+    t.integer "items"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "title"
     t.decimal "price"

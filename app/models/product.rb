@@ -10,6 +10,7 @@ class Product < ApplicationRecord
   has_rich_text :description
   has_and_belongs_to_many :coupons
   has_many_attached :images
+  has_and_belongs_to_many :coupons
   has_many :line_items
 
   PUBLISH = 'published'.freeze

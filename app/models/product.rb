@@ -17,7 +17,7 @@ class Product < ApplicationRecord
   validates :price, presence: true, numericality: true
   validates :description, length: { minimum: 15 }
 
-  def titleized
+  def titleize_title
     title.titleize
   end
 end

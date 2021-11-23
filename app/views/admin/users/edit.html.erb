@@ -6,7 +6,7 @@
 
     <div class="card-body border-bottom border-3 border-primary">
       <%= form_for [:admin, @user] do |f| %>
-        <%= render 'admin/shared/errors', item: @user %>
+        <%= render 'shared/errors', item: @user %>
 
         <div class="form-group mt-2">
           <%= f.label :firstname, value: "First name", class: "form-label" %>

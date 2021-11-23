@@ -5,6 +5,7 @@ module SortHelper
 
   def sort_column
     return  params[:sort] if controller_name.classify.constantize.column_names.include?(params[:sort])
+
     "id"
   end
 

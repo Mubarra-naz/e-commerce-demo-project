@@ -1,13 +1,13 @@
 <div class="container p-5">
   <div class="card">
     <div class="card-header bg-primary text-light">
-      <h2><%= @product.titleized %></h2>
+      <h2><%= @product.titleize_title %></h2>
     </div>
 
-    <%= render 'product_form' %>
+    <%= render 'form' %>
 
     <div class="card-footer mt-3 bg-primary">
-      <%= render 'admin/shared/links', item: @product %>
+      <%= render 'shared/links', item: @product %>
     </div>
   </div>
 </div>

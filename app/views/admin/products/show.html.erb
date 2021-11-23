@@ -1,7 +1,7 @@
 <div class="container p-5">
   <div class="card">
     <div class="card-header bg-primary text-light">
-      <h2><%= @product.titleized %></h2>
+      <h2><%= @product.titleize_title %></h2>
     </div>
 
     <div class="card-body border-bottom border-3 border-primary">
@@ -19,7 +19,7 @@
     </div>
 
     <div class="card-footer bg-primary">
-      <%= render 'admin/shared/links', item: @product %>
+      <%= render 'shared/links', item: @product %>
     </div>
   </div>
 </div>

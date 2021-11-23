@@ -12,6 +12,7 @@ class Product < ApplicationRecord
   PENDING = 'pending'.freeze
   STATUS = {published: PUBLISH, draft: DRAFT, pending: PENDING}.freeze
   CSV_HEADERS = %i[id title price status].freeze
+  EAGERLOADING_OBJECTS = %i[category].freeze
 
   enum status: STATUS
 

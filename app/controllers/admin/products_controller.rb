@@ -3,7 +3,7 @@ class Admin::ProductsController < Admin::AdminsController
 
   def index
     respond_to do |format|
-      format.html { @products = Product.includes(:category).search(helpers.sort_column, helpers.sort_direction, params[:page], params[:query]) }
+      format.html { @products = Product.search(helpers.sort_column, helpers.sort_direction, params[:page], params[:query]) }
       format.csv { send_data CsvProcessor.new(Product::CSV_HEADERS, 'Product').generate, filename: "products-#{Date.today}.csv" }
     end
   end

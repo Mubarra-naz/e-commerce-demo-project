@@ -15,7 +15,6 @@ class Admin::CategoriesController < Admin::AdminsController
     if @category.save
       redirect_to admin_categories_path, notice: "Created Category Successfully"
     else
-      flash.now[:notice] = "Couldn't create"
       render 'new'
     end
   end
@@ -28,7 +27,6 @@ class Admin::CategoriesController < Admin::AdminsController
     if @category.update(category_params)
       redirect_to admin_categories_path, notice: "Updated category Successfully"
     else
-      flash.now[:notice] = "Couldn't update."
       render 'edit'
     end
   end

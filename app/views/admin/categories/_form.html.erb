@@ -1,6 +1,6 @@
 <div class="card-body border-bottom border-3 border-primary">
   <%= form_for [:admin, @category] do |f| %>
-    <%= render 'admin/shared/errors', item: @category %>
+    <%= render 'shared/errors', item: @category %>
 
     <div class="form-group mt-2">
       <%= f.label :name, class: "form-label" %>

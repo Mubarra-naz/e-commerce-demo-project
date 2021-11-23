@@ -20,24 +20,6 @@ class Admin::UsersController < Admin::AdminsController
     end
   end
 
-  def show; end
-
-  def edit; end
-
-  def update
-    if params.dig(:user, :password).blank?
-      updated = @user.update_without_password(user_params.to_unsafe_hash)
-    else
-      updated = @user.update(user_params)
-    end
-    if updated
-      redirect_to admin_users_path, notice: "Updated Successfully"
-    else
-      flash.now[:notice] = "Couldn't update."
-      render 'edit'
-    end
-  end
-
   def destroy
     if @user.destroy
       flash[:notice] = "User deleted successfully"

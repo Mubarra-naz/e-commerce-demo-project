@@ -7,6 +7,7 @@ class User < ApplicationRecord
       :recoverable, :rememberable, :validatable, :confirmable
 
   has_one :cart, dependent: :destroy
+  has_many :orders
 
   attr_writer :login, :skip_password_validation
 

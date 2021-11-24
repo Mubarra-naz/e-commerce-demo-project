@@ -123,9 +123,10 @@ ActiveRecord::Schema.define(version: 2021_11_26_134322) do
   create_table "orders", force: :cascade do |t|
     t.decimal "price"
     t.bigint "user_id", null: false
-    t.integer "items"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.decimal "discount"
+    t.string "payment_method"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -166,6 +167,9 @@ ActiveRecord::Schema.define(version: 2021_11_26_134322) do
     t.datetime "invitation_accepted_at"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
+    t.index ["invited_by_id"], name: "index_users_on_invited_by_id"
+    t.index ["invited_by_type", "invited_by_id"], name: "index_users_on_invited_by"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end
@@ -175,6 +179,8 @@ ActiveRecord::Schema.define(version: 2021_11_26_134322) do
   add_foreign_key "carts", "users"
   add_foreign_key "line_items", "carts"
   add_foreign_key "line_items", "products"
+  add_foreign_key "ordered_products", "orders"
+  add_foreign_key "ordered_products", "products"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "categories"
 end

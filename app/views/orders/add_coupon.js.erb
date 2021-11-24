@@ -1,0 +1,2 @@
+var rows = '<tr><td>Discount:</td><td>$<%= session[:order]["discount"] %></td></tr><tr><td>Total after discount:</td><td>$<strong><%= session[:order]["price"] %></strong></td></tr>';
+$('#price-table').html(rows);

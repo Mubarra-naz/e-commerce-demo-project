@@ -3,15 +3,9 @@ class LineItemsController < ApplicationController
   before_action :set_cart, only: :create
 
   def create
-<<<<<<< HEAD
     @product = Product.find(params[:product_id])
     @line_item = @cart.add_item(@product)
 
-=======
-    logger.info('in line item create')
-    @product = Product.find(params[:product_id])
-    @line_item = @cart.add_item(@product)
->>>>>>> 912acde (cart functionality added)
     if @line_item.save
       redirect_to products_path, notice: 'Item successfully added to cart.'
     else

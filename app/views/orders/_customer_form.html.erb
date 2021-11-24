@@ -1,0 +1,54 @@
+<%= form_for @user, url: customer_info_user_path, remote: true do |f| %>
+  <div class='d-flex'>
+    <div class='col-5 m-3'>
+      <div class="form-group mt-2">
+        <%= f.label :firstname, value: "First name", class: "form-label" %>
+        <%= f.text_field :firstname, autofocus: true, class: "form-control", required: true  %>
+      </div>
+
+      <div class="form-group mt-2">
+        <%= f.label :lastname, value: "Last name", class: "form-label" %>
+        <%= f.text_field :lastname, autofocus: true, class: "form-control", required: true %>
+      </div>
+
+      <div class="form-group mt-2">
+        <%= f.label :email, class: "form-label" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", required: true %>
+      </div>
+
+      <div class="form-group mt-2">
+        <%= f.label :phone, class: "form-label" %>
+        <%= f.text_field :phone, autofocus: true, class: "form-control", required: true %>
+      </div>
+    </div>
+    <div class='col-5 m-3'>
+      <div class="form-group mt-2">
+        <%= f.label :zip_code, class: "form-label" %>
+        <%= f.text_field :zip_code, autofocus: true, class: "form-control", required: true %>
+      </div>
+
+      <div class="form-group mt-2">
+        <%= f.label :country, class: "form-label" %>
+        <%= f.select :country, options_for_select(CS.countries.map { |c| [c[1], c[0]] } ), {}, { class: "form-control js-example-basic-multiple dropper", required: true } %>
+      </div>
+
+      <div class="form-group mt-2">
+        <%= f.label :state, class: "form-label" %>
+        <%= f.select :state, options_for_select([]), {}, { class: "form-control js-example-basic-multiple dropper", required: true } %>
+      </div>
+
+      <div class="form-group mt-2">
+        <%= f.label :city, class: "form-label" %>
+        <%= f.select :city, options_for_select([]), {}, { class: "form-control js-example-basic-multiple dropper", required: true } %>
+      </div>
+    </div>
+  </div>
+  <div class="form-group mt-2">
+    <%= f.label :address, class: "form-label" %>
+    <%= f.text_field :address, autofocus: true, multiline: true, class: "form-control", required: true %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Continue", class: "btn mt-4 w-100 btn-outline-primary" %>
+  </div>
+<% end %>

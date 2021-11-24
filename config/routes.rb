@@ -27,7 +27,11 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :checkout
+    resources :orders, only: [:new, :create]
+    post '/add_coupon', to: 'orders#add_coupon'
+    patch '/customer_info', to: 'orders#update_user'
+    get '/states', to: 'orders#states'
+    get '/cities', to: 'orders#cities'
   end
 
   resources :products, only: [:index, :show]

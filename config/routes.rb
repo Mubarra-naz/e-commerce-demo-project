@@ -44,5 +44,6 @@ Rails.application.routes.draw do
     resources :products
     resources :categories
     resources :coupons
+    resources :orders, only: [:index]
   end
 end

@@ -1,12 +1,10 @@
 class Admin::CouponsController < Admin::AdminsController
-  include SortHelper
-
   before_action :set_coupon, except: [:index, :new, :create]
 
   def index
     respond_to do |format|
-      format.html { search_coupons }
-      format.csv { export_csv }
+      format.html { @coupons = Coupon.search(helpers.sort_column, helpers.sort_direction, params[:page], params[:query]) }
+      format.csv { send_data CsvProcessor.new(Coupon::CSV_HEADERS, 'Coupon').generate, filename: "coupons-#{Date.today}.csv" }
     end
   end
 
@@ -20,7 +18,6 @@ class Admin::CouponsController < Admin::AdminsController
     if @coupon.save
       redirect_to admin_coupons_path, notice: "Created Coupon Successfully"
     else
-      flash.now[:notice]="Couldn't create"
       render 'new'
     end
   end
@@ -33,7 +30,6 @@ class Admin::CouponsController < Admin::AdminsController
     if @coupon.update(coupon_params)
       redirect_to admin_coupons_path, notice: "Updated coupon Successfully"
     else
-      flash.now[:notice]="Couldn't update."
       render 'edit'
     end
   end
@@ -49,19 +45,6 @@ class Admin::CouponsController < Admin::AdminsController
   end
 
   private
-
-  def export_csv
-    headers['Content-Disposition'] = "attachment; filename=\"coupon-list\""
-    headers['Content-Type'] ||= 'text/csv'
-  end
-
-  def search_coupons
-    if params[:search].present?
-      @coupons = Coupon.all.search_coupons(params[:search]).order(sort_column + " " + sort_direction).page(params[:page]).per(5)
-    else
-      @coupons = Coupon.order(sort_column + " " + sort_direction).page(params[:page]).per(5)
-    end
-  end
 
   def set_coupon
     @coupon = Coupon.find(params[:id])

@@ -12,7 +12,7 @@ class User < ApplicationRecord
   ADMIN = 'admin'.freeze
   ROLES = {user: USER, admin: ADMIN}.freeze
   CSV_HEADERS = %i[id full_name username email role confirmation_status].freeze
-  EAGERLOADING_OBJECTS = [].freeze
+
   enum role: ROLES
 
   validate :password_validation, if: :password

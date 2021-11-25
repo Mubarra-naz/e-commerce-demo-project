@@ -1,6 +1,5 @@
 module ApplicationHelper
   def select_options(model_name, attribute)
-    symbol = attribute.to_sym
-    model_name.classify.constantize.pluck(symbol, :id)
+    model_name.classify.constantize.pluck(attribute, :id)
   end
 end

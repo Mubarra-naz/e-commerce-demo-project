@@ -37,4 +37,10 @@ Rails.application.routes.draw do
     resources :coupons
     resources :orders, only: [:index]
   end
+
+  namespace 'api'do
+    scope module: 'v1' do
+      resources :products, except: [:edit, :new]
+    end
+  end
 end

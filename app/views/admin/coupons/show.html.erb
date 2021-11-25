@@ -13,11 +13,11 @@
 
       <h5 class="card-title">Discounted Products</h5>
       <p class="card-text">
-        <% @coupon.products.each do |product|  %>
-          <ul>
+        <ul>
+          <% @coupon.products.each do |product|  %>
             <li><%= product.title %></li>
-          </ul>
-        <% end %>
+          <% end %>
+        </ul>
       </p>
     </div>
 

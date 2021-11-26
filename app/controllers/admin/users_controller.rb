@@ -20,22 +20,6 @@ class Admin::UsersController < Admin::AdminsController
     end
   end
 
-  def show; end
-
-  def edit; end
-
-  def update
-    params[:user].delete(:password) if params[:user][:password].blank?
-    params[:user].delete(:password_confirmation) if params[:user][:password].blank? and params[:user][:password_confirmation].blank?
-
-    if @user.update(user_params)
-    redirect_to admin_users_path, notice: "Updated Successfully"
-    else
-      flash.now[:notice]="Couldn't update."
-      render 'edit'
-    end
-  end
-
   def destroy
     if @user.destroy
       flash[:notice] = "User deleted successfully"

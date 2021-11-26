@@ -1,7 +1,6 @@
 <div class="container p-5">
   <div class="card">
     <div class="card-header bg-primary text-light">
-<<<<<<< HEAD
       <h2><%= @user.full_name %></h2>
     </div>
 
@@ -9,13 +8,6 @@
       <%= form_for [:admin, @user] do |f| %>
         <%= render 'shared/errors', item: @user %>
 
-=======
-      <h2><%= @user.full_name.titleize %></h2>
-    </div>
-
-    <div class="card-body border-bottom border-3 border-primary">
-      <%= form_for @user, url: admin_user_path do |f| %>
->>>>>>> 79e9f21 (Admin can edit user profile functionality added)
         <div class="form-group mt-2">
           <%= f.label :firstname, value: "First name", class: "form-label" %>
           <%= f.text_field :firstname, autofocus: true, class: "form-control" %>

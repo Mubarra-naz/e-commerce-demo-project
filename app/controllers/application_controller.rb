@@ -14,6 +14,8 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     return admin_users_path if resource.admin?
 
+    return set_password_user_path unless resource.invitation_confirmed?
+
     products_path
   end
 end

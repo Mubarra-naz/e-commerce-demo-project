@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   has_one :cart, dependent: :destroy
 
-  attr_writer :login
+  attr_writer :login, :skip_password_validation
 
   USER = 'user'.freeze
   ADMIN = 'admin'.freeze
@@ -17,11 +17,12 @@ class User < ApplicationRecord
 
   enum role: ROLES
 
-  validate :password_validation, if: :password
+  validate :password_validation, if: :password_required?
   validates :firstname, :lastname, presence: true, format: { with: /^[a-zA-Z]{3,30}/, multiline: true, message: "should be either uppercase or lowercase alphabets only" }
   validates :username, uniqueness: true, presence: true, format: { with: /^(?=.*[a-z])|(?=.*[A-Z])|(?=.*[0-9])(?=.{3,30})/, multiline: true, message: "should be either uppercase, lowercase or numeric value" }
 
   after_initialize :set_default_role, if: :new_record?
+  before_save :set_invite_fields, if: :new_record?
 
   def login
     @login || username || email
@@ -35,6 +36,10 @@ class User < ApplicationRecord
     return "Confirmed" if confirmed_at.present?
 
     "Unconfirmed"
+  end
+
+  def invitation_confirmed?
+    created_by_invite? && invitation_accepted_at
   end
 
   private
@@ -64,5 +69,21 @@ class User < ApplicationRecord
     rules.each do |message, regex|
       errors.add :password, message unless password.match(regex)
     end
+  end
+
+  def created_by_invite?
+    invitation_created_at?
+  end
+
+  def set_invite_fields
+    if created_by_invite?
+      self.password = SecureRandom.alphanumeric(9) + ["!","@","$","%"].join
+      self.invitation_sent_at = Time.current
+    end
+  end
+
+  def password_required?
+    return false if @skip_password_validation
+    super
   end
 end

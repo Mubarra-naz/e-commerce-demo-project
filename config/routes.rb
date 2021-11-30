@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       get 'set_password'
       patch 'update_password'
     end
+
     resource :cart
     resources :line_items do
       post 'update_qty', on: :member

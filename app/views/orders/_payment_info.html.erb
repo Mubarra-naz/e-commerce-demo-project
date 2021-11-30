@@ -10,15 +10,16 @@
     <%= link_to 'confirm', 'javascript:void(0);', id: 'payment-submission', class: 'btn btn-primary m-2' %>
   </div>
 <% end %>
+<script src="https://js.braintreegateway.com/web/dropin/1.32.1/js/dropin.min.js"></script>
 
 <script>
   var form = $('#payment-form');
   var submitButton = $('#payment-submission');
   var client_token = "<%= @client_token %>";
-  var option = $("input[type='radio'][name='payment_method']");
+  var option = $("input[name='payment_method']");
 
-  option.change(function() {
-    if (this.value == 'online') {
+  option.on('change', function() {
+    if ($(this).val() == 'online') {
       $('#card').removeClass('d-none').addClass('d-block');
     }
   });
@@ -32,7 +33,7 @@
       return;
     }
     submitButton.on('click', function (event) {
-      if(option.value == 'online') {
+      if($("input[name='payment_method']:checked").val() == 'online') {
         dropinInstance.requestPaymentMethod(function (err, payload) {
           if (err) {
             console.log('payload Error', err);

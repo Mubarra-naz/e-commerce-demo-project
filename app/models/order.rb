@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-  has_many :ordered_products
+  has_many :ordered_products, dependent: :destroy
 
   belongs_to :user
 

@@ -2,10 +2,9 @@ $(document).on("turbolinks:load", function(){
   $('.item').on('change', function(){
     $.ajax({
       type: "POST",
-      url: "/user/update_qty",
+      url: "/user/line_items/"+ $(this).attr('id') +"/update_qty",
       data:{
-            qty: $(this).val(),
-            id: $(this).attr('id')
+            qty: $(this).val()
             },
       success: function (response){
         location.reload();

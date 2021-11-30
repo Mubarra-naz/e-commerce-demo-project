@@ -9,6 +9,7 @@ class CartsController < ApplicationController
     else
       flash[:error] = @cart.errors.full_messages.to_sentence
     end
+
     current_user.reload
     redirect_to products_path
   end

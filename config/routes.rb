@@ -8,9 +8,11 @@ Rails.application.routes.draw do
 
   resource :user, only: :show do
     resource :cart
-    resources :line_items
-    post '/update_qty', to: 'line_items#update_qty'
+    resources :line_items do
+      post 'update_qty', on: :member
+    end
   end
+
   resources :products, only: [:index, :show]
 
   namespace :admin do

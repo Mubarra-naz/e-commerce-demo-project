@@ -5,6 +5,7 @@ class LineItemsController < ApplicationController
   def create
     @product = Product.find(params[:product_id])
     @line_item = @cart.add_item(@product)
+
     if @line_item.save
       redirect_to products_path, notice: 'Item successfully added to cart.'
     else
@@ -34,6 +35,7 @@ class LineItemsController < ApplicationController
 
   def set_cart
     @user=User.find(current_user.id)
+
     if @user.cart.present?
       @cart = @user.cart
     else

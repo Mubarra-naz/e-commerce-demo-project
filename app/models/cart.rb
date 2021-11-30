@@ -11,6 +11,7 @@ class Cart < ApplicationRecord
     else
       item = line_items.build(product_id: product.id)
     end
+
     item
   end
 end

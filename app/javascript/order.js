@@ -69,5 +69,4 @@ $(document).on("turbolinks:load", function(){
     $('#collapse-one').removeClass('show').addClass('hide')
     $('#collapse-two').removeClass('hide').addClass('show')
   });
-
 });

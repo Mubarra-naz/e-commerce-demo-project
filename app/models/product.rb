@@ -11,12 +11,13 @@ class Product < ApplicationRecord
   has_and_belongs_to_many :coupons
   has_many_attached :images
   has_many :line_items, dependent: :destroy
-  has_many :ordered_products
+  has_many :ordered_products, dependent: :restrict_with_error
 
   PUBLISH = 'published'.freeze
   DRAFT = 'draft'.freeze
   PENDING = 'pending'.freeze
-  STATUS = {published: PUBLISH, draft: DRAFT, pending: PENDING}.freeze
+  DEACTIVATED = 'deactivated'.freeze
+  STATUS = {published: PUBLISH, draft: DRAFT, pending: PENDING, deactivated: DEACTIVATED}.freeze
   CSV_HEADERS = %i[id title price status].freeze
 
   scope :eager_load_search_associations, -> { includes(:category, :images_attachments) }

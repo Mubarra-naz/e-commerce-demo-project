@@ -1,5 +1,5 @@
 class Admin::UsersController < Admin::AdminsController
-  before_action :set_user, except: [:index, :new, :create]
+  before_action :set_user, except: %i[index new create]
 
   def index
     respond_to do |format|

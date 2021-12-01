@@ -38,8 +38,8 @@ class User < ApplicationRecord
     "Unconfirmed"
   end
 
-  def invitation_confirmed?
-    created_by_invite? && invitation_accepted_at
+  def created_by_invite?
+    invitation_created_at?
   end
 
   private
@@ -69,10 +69,6 @@ class User < ApplicationRecord
     rules.each do |message, regex|
       errors.add :password, message unless password.match(regex)
     end
-  end
-
-  def created_by_invite?
-    invitation_created_at?
   end
 
   def set_invite_fields

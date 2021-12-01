@@ -2,7 +2,7 @@ module WithOrder
   extend ActiveSupport::Concern
 
   included do
-    before_action :set_user, :set_cart, except: [:states, :cities]
+    before_action :set_user, :set_cart, except: %i[states cities]
   end
 
   def add_coupon
@@ -14,6 +14,7 @@ module WithOrder
     else
       flash.now[:error] = "invalid coupon code"
     end
+
     respond_to do |f|
       f.js
     end
@@ -26,6 +27,7 @@ module WithOrder
     else
       flash.now[:error] = @user.errors.full_messages
     end
+
     respond_to do |f|
       f.js
     end

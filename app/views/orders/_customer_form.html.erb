@@ -1,4 +1,4 @@
-<%= form_for @user, url: customer_info_user_path, remote: true do |f| %>
+<%= form_for @user, url: customer_info_user_orders_path, remote: true do |f| %>
   <div class='d-flex'>
     <div class='col-5 m-3'>
       <div class="form-group mt-2">
@@ -21,6 +21,7 @@
         <%= f.text_field :phone, autofocus: true, class: "form-control", required: true %>
       </div>
     </div>
+
     <div class='col-5 m-3'>
       <div class="form-group mt-2">
         <%= f.label :zip_code, class: "form-label" %>
@@ -43,6 +44,7 @@
       </div>
     </div>
   </div>
+
   <div class="form-group mt-2">
     <%= f.label :address, class: "form-label" %>
     <%= f.text_field :address, autofocus: true, multiline: true, class: "form-control", required: true %>

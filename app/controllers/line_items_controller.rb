@@ -23,8 +23,12 @@ class LineItemsController < ApplicationController
     redirect_to user_cart_path
   end
 
-  def update_qty
-    @line_item.update(quantity: params[:qty])
+  def update_quantity
+    if @line_item.update(quantity: params[:qty])
+      render json: { line_item: @line_item }
+    else
+      render json: { errors: @line_item.errors.full_messages }
+    end
   end
 
   private
@@ -34,13 +38,6 @@ class LineItemsController < ApplicationController
   end
 
   def set_cart
-    @user=User.find(current_user.id)
-
-    if @user.cart.present?
-      @cart = @user.cart
-    else
-      @cart=@user.create_cart
-      current_user.reload
-    end
+    @cart = current_user.cart.present? || current_user.create_cart
   end
 end

@@ -6,7 +6,7 @@ class Cart < ApplicationRecord
   def add_item(product)
     item = line_items.find_by(product_id: product.id)
 
-    if item
+    if item.prsent?
       item.increment(:quantity)
     else
       item = line_items.build(product_id: product.id)

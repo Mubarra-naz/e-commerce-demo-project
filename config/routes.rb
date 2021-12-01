@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resource :user, only: :show do
     resource :cart
     resources :line_items do
-      post 'update_qty', on: :member
+      post 'update_quantity', on: :member, defaults: { format: :json }
     end
   end
 

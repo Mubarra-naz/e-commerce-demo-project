@@ -2,7 +2,7 @@
   <td><%= line_item.product.title %></td>
   <td><%= line_item.product.price %></td>
   <td>
-    <%= number_field_tag 'quantity', line_item.quantity, id: line_item.id, class: 'item' %>
+    <%= number_field_tag 'quantity', line_item.quantity, id: line_item.id, class: 'item', min: 1 %>
   </td>
   <td><%= total_price(line_item) %></td>
   <td>

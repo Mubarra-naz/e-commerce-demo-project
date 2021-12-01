@@ -6,4 +6,9 @@
   <td><%= order.user.phone %></td>
   <td><%= order.ordered_products.size %></td>
   <td><%= order.payment_method %></td>
+  <td>
+    <% order.ordered_products.each  do |item| %>
+    Name: <%= item.product.title %>,   Quantity: <%= item.quantity %><br>
+    <% end %>
+  </td>
 </tr>

@@ -7,8 +7,12 @@ class Api::V1::ProductsController < Api::V1::ApiController
   end
 
   def create
-    @product = Product.create(product_params)
-    render json: @product
+    @product = Product.new(product_params)
+    if @product.save
+      render json: @product
+    else
+      render json: @product.errors.full_messages, status: 404
+    end
   end
 
   def show;
@@ -16,13 +20,19 @@ class Api::V1::ProductsController < Api::V1::ApiController
   end
 
   def update
-    @product.update(product_params)
-    render json: @product
+    if @product.update(product_params)
+      render json: @product
+    else
+      render json: @product.errors.full_messages, status: 404
+    end
   end
 
   def destroy
-    @product.destroy
-    render json: @products
+    if @product.destroy
+      render json: @products
+    else
+      render json: @product.errors.full_messages, status: 404
+    end
   end
 
   private

@@ -12,6 +12,7 @@ class OrdersController < ApplicationController
     result = PlaceOrder.call(
       order_params: session[:order], payment_method_nonce: params[:nonce], items: @cart.line_items
     )
+
     if result.success?
       @cart.line_items.destroy_all
       redirect_to products_path, notice: "order placed successfully"
@@ -25,8 +26,8 @@ class OrdersController < ApplicationController
   def set_user
     @user = User.find(current_user.id)
   end
+
   def set_cart
     @cart = @user.cart
   end
-
 end

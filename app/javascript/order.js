@@ -6,8 +6,8 @@ $(document).on("turbolinks:load", function(){
         type: "POST",
         url: "/user/line_items/"+ $(this).attr('id') +"/update_qty",
         data:{
-              qty: $(this).val()
-              },
+          qty: quantity
+        },
         success: function (response){
           location.reload();
         },
@@ -21,7 +21,7 @@ $(document).on("turbolinks:load", function(){
   $('#user_country').on('change', function(){
     $.ajax({
       type: 'GET',
-      url: '/user/states',
+      url: '/user/orders/states',
       data:{
         country: $(this).val()
       },
@@ -42,7 +42,7 @@ $(document).on("turbolinks:load", function(){
   $('#user_state').on('change', function(){
     $.ajax({
       type: 'GET',
-      url: '/user/cities',
+      url: '/user/orders/cities',
       data:{
         country: $('#country').children(':selected').val(),
         state: $(this).val()
@@ -64,5 +64,11 @@ $(document).on("turbolinks:load", function(){
   $('#checkout').on('click', function(){
     $('#collapse-one').removeClass('show').addClass('hide')
     $('#collapse-two').removeClass('hide').addClass('show')
+  });
+
+  $("input[name='payment_method']").on('change', function() {
+    if ($(this).val() == 'online') {
+      $('#card').removeClass('d-none').addClass('d-block');
+    }
   });
 });

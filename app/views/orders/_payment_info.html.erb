@@ -1,4 +1,42 @@
+<%= content_for :payment_js do %>
+  <script type="text/javascript">
+    $(document).on('turbolinks:load', function() {
+      var form = $('#payment-form');
+      var submitButton = $('#payment-submission');
+      var client_token = $('#pay_token').val();
+
+
+      braintree.dropin.create({
+        authorization: client_token,
+        selector: '#dropin-container'
+      }, function (err, dropinInstance) {
+        if (err) {
+          console.log('braintree Error',err);
+          return;
+        }
+
+        submitButton.on('click', function (event) {
+          if($("input[name='payment_method']:checked").val() == 'online') {
+            dropinInstance.requestPaymentMethod(function (err, payload) {
+              if (err) {
+                console.log('payload Error', err);
+              }
+
+              $('#nonce').val(payload.nonce);
+              form.submit();
+            });
+          } else {
+            form.submit();
+          }
+        });
+      });
+    });
+  </script>
+<% end %>
+
 <h3>Select your payment preference:</h3>
+<%= hidden_field_tag :pay_token, @client_token %>
+
 <%= form_with url: user_orders_path, method: :post, id: "payment-form", local: false do |f| %>
   <%= f.radio_button :payment_method, Order::CASH %> Cash on Delivery
   <%= f.radio_button :payment_method, Order::ONLINE, class: 'ms-5' %> Credit/Debit card
@@ -10,41 +48,3 @@
     <%= link_to 'confirm', 'javascript:void(0);', id: 'payment-submission', class: 'btn btn-primary m-2' %>
   </div>
 <% end %>
-<script src="https://js.braintreegateway.com/web/dropin/1.32.1/js/dropin.min.js"></script>
-
-<script>
-  var form = $('#payment-form');
-  var submitButton = $('#payment-submission');
-  var client_token = "<%= @client_token %>";
-  var option = $("input[name='payment_method']");
-
-  option.on('change', function() {
-    if ($(this).val() == 'online') {
-      $('#card').removeClass('d-none').addClass('d-block');
-    }
-  });
-
-  braintree.dropin.create({
-    authorization: client_token,
-    selector: '#dropin-container'
-  }, function (err, dropinInstance) {
-    if (err) {
-      console.log('braintree Error',err);
-      return;
-    }
-    submitButton.on('click', function (event) {
-      if($("input[name='payment_method']:checked").val() == 'online') {
-        dropinInstance.requestPaymentMethod(function (err, payload) {
-          if (err) {
-            console.log('payload Error', err);
-          }
-
-          $('#nonce').val(payload.nonce);
-          form.submit();
-        });
-      } else {
-        form.submit();
-      }
-    });
-  });
-</script>

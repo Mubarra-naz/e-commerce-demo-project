@@ -13,15 +13,19 @@ Rails.application.routes.draw do
     end
 
     resource :cart
+
     resources :line_items do
       post 'update_qty', on: :member
     end
 
-    resources :orders, only: [:new, :create]
-    post '/add_coupon', to: 'orders#add_coupon'
-    patch '/customer_info', to: 'orders#update_user'
-    get '/states', to: 'orders#states'
-    get '/cities', to: 'orders#cities'
+    resources :orders, only: [:new, :create] do
+      collection do
+        get 'states'
+        get 'cities'
+        post 'add_coupon'
+        patch 'customer_info'
+      end
+    end
   end
 
   resources :products, only: [:index, :show]

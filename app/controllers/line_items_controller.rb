@@ -35,10 +35,7 @@ class LineItemsController < ApplicationController
 
   def set_cart
     @user=User.find(current_user.id)
-<<<<<<< HEAD
 
-=======
->>>>>>> 912acde (cart functionality added)
     if @user.cart.present?
       @cart = @user.cart
     else

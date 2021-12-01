@@ -1,5 +1,4 @@
 class Coupon < ApplicationRecord
-<<<<<<< HEAD
   extend Searchable
   include PgSearch::Model
   pg_search_scope :search_by_keys, against: %i[name discount_type discount]

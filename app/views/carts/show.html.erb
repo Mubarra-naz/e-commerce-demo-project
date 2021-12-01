@@ -15,6 +15,7 @@
 
   <% if @cart.line_items.any? %>
     <%= link_to "Empty Cart", user_cart_path, method: :delete, data: { confirm: "Are you sure" }, class: 'btn btn-danger px-3 mx-1' %>
+
     <%= link_to "Proceed to checkout", new_user_order_path, class: 'btn btn-success px-3 mx-1' %>
   <% end %>
 </div>

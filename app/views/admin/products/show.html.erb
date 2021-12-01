@@ -25,8 +25,7 @@
       <p class="card-text"><%= @product.status %></p>
 
       <h5 class="card-title">Category</h5>
-      <p class="card-text"><%= @product.category.name %></p>
-
+      <p class="card-text"><%= @product.category.name if @product.category %></p>
     </div>
 
     <div class="card-footer bg-primary">

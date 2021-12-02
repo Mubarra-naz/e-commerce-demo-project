@@ -8,20 +8,19 @@ class User < ApplicationRecord
 
   has_one :cart, dependent: :destroy
 
-  attr_writer :login, :skip_password_validation
+  attr_accessor :login, :skip_password_validation
 
   USER = 'user'.freeze
   ADMIN = 'admin'.freeze
   ROLES = {user: USER, admin: ADMIN}.freeze
   CSV_HEADERS = %i[id full_name username email role confirmation_status].freeze
 
-  enum role: ROLES
+  enum role: ROLES, _default: USER
 
   validate :password_validation, if: :password_required?
   validates :firstname, :lastname, presence: true, format: { with: /^[a-zA-Z]{3,30}/, multiline: true, message: "should be either uppercase or lowercase alphabets only" }
   validates :username, uniqueness: true, presence: true, format: { with: /^(?=.*[a-z])|(?=.*[A-Z])|(?=.*[0-9])(?=.{3,30})/, multiline: true, message: "should be either uppercase, lowercase or numeric value" }
 
-  after_initialize :set_default_role, if: :new_record?
   before_save :set_invite_fields, if: :new_record?
 
   def login
@@ -42,11 +41,13 @@ class User < ApplicationRecord
     invitation_created_at?
   end
 
-  private
-
-  def set_default_role
-    self.role ||= USER
+  def set_invitable_user
+    self.invitation_created_at = Time.current
+    self.skip_password_validation = true
+    self.skip_confirmation!
   end
+
+  private
 
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
@@ -72,14 +73,15 @@ class User < ApplicationRecord
   end
 
   def set_invite_fields
-    if created_by_invite?
-      self.password = SecureRandom.alphanumeric(9) + ["!","@","$","%"].join
-      self.invitation_sent_at = Time.current
-    end
+    return unless created_by_invite?
+
+    self.invitation_sent_at = Time.current
+    self.password = SecureRandom.alphanumeric(9) + ["!","@","$","%"].join
   end
 
   def password_required?
-    return false if @skip_password_validation
+    return false if skip_password_validation
+
     super
   end
 end

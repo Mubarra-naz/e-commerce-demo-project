@@ -14,12 +14,10 @@ class Admin::UsersController < Admin::AdminsController
 
   def create
     @user = User.new(user_params)
-    @user.invitation_created_at = Time.current
-    @user.skip_password_validation = true
-    @user.skip_confirmation!
+    @user.set_invitable_user
 
     if @user.save
-      InvitationMailer.with(user: @user).invitations_instructions.deliver_now
+      InvitationMailer.with(user: @user, password: @user.password).invitations_instructions.deliver_later
       redirect_to admin_users_path, notice: "Invitation sent to user"
     else
       render 'new'

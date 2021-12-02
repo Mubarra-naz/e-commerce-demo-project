@@ -34,7 +34,7 @@ class LineItemsController < ApplicationController
   private
 
   def set_line_item
-    @line_item = LineItem.find(params[:id])
+    @line_item = LineItem.eager_load_associations.find(params[:id])
   end
 
   def set_cart

@@ -1,5 +1,5 @@
 class LineItem < ApplicationRecord
-  default_scope { includes(:product) }
+  scope :eager_load_associations, -> { includes(:product) }
 
   belongs_to :product
   belongs_to :cart

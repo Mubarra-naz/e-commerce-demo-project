@@ -16,8 +16,8 @@ class CartsController < ApplicationController
   private
 
   def set_cart
-    @cart = current_user.cart
+    return redirect_to products_path, notice: "Nothing in the cart" unless current_user.cart.present?
 
-    redirect_to products_path, notice: "Nothing in the cart" unless @cart.present?
+    @cart = Cart.eager_load_associations.find(current_user.cart.id)
   end
 end

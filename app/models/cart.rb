@@ -1,5 +1,5 @@
 class Cart < ApplicationRecord
-  default_scope { includes(:line_items) }
+  scope :eager_load_associations, -> { includes(line_items: [:product]) }
 
   belongs_to :user
 

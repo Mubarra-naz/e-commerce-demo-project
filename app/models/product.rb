@@ -17,7 +17,7 @@ class Product < ApplicationRecord
   CSV_HEADERS = %i[id title price status].freeze
 
   scope :eager_load_search_associations, -> { includes(:category) }
-
+  scope :published, -> { where(status: PUBLISH) }
   enum status: STATUS
 
   validates :title, presence: true
@@ -28,9 +28,5 @@ class Product < ApplicationRecord
 
   def titleize_title
     title.titleize
-  end
-
-  def self.find_for_customers
-    where(status: PUBLISH)
   end
 end

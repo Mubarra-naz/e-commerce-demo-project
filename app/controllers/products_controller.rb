@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
   def index
-    @products=Product.find_for_customers
+    @products = Product.published
   end
 end

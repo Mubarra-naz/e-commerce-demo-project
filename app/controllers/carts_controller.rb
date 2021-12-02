@@ -18,6 +18,6 @@ class CartsController < ApplicationController
   def set_cart
     @cart = current_user.cart
 
-    redirect_to products_path, notice: "Nothing in the cart" unless current_user.cart.present?
+    redirect_to products_path, notice: "Nothing in the cart" unless @cart.present?
   end
 end

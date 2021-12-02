@@ -38,6 +38,6 @@ class LineItemsController < ApplicationController
   end
 
   def set_cart
-    @cart = current_user.cart.present? || current_user.create_cart
+    @cart = current_user.cart.presence || current_user.create_cart
   end
 end

@@ -1,0 +1,17 @@
+<div class="container-fluid">
+  <table class="table table-bordered table-striped">
+    <thead class="bg-primary text-light">
+      <td>Title</td>
+      <td>Price</td>
+      <td>Quantity</td>
+      <td>Total price</td>
+      <td>Actions</td>
+    </thead>
+
+    <tbody>
+      <%= render @cart.line_items %>
+    </tbody>
+  </table>
+
+  <%= link_to "Empty Cart", user_cart_path, method: :delete, data: { confirm: "Are you sure" }, class: 'btn btn-danger px-3 mx-1' %>
+</div>

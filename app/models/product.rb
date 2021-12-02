@@ -7,6 +7,8 @@ class Product < ApplicationRecord
 
   has_rich_text :description
   has_and_belongs_to_many :coupons
+  has_many_attached :images
+  has_many :line_items, dependent: :destroy
 
   PUBLISH = 'published'.freeze
   DRAFT = 'draft'.freeze
@@ -14,8 +16,8 @@ class Product < ApplicationRecord
   STATUS = {published: PUBLISH, draft: DRAFT, pending: PENDING}.freeze
   CSV_HEADERS = %i[id title price status].freeze
 
-  scope :eager_load_search_associations, -> { includes(:category) }
-
+  scope :eager_load_search_associations, -> { includes(:category, :images_attachments) }
+  scope :published, -> { eager_load_search_associations.where(status: PUBLISH) }
   enum status: STATUS
 
   validates :title, presence: true

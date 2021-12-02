@@ -6,7 +6,14 @@ Rails.application.routes.draw do
     root 'devise/sessions#new'
   end
 
-  resource :user, only: :show
+  resource :user, only: :show do
+    resource :cart
+    resources :line_items do
+      post 'update_quantity', on: :member, defaults: { format: :json }
+    end
+  end
+
+  resources :products, only: [:index, :show]
 
   namespace :admin do
     resources :users

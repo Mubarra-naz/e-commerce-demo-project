@@ -31,4 +31,10 @@ class Product < ApplicationRecord
   def titleize_title
     title.titleize
   end
+
+
+  def deactivate
+    update(status: DEACTIVATED)
+    line_items.destroy_all
+  end
 end

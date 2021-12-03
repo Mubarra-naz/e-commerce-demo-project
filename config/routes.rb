@@ -20,8 +20,8 @@ Rails.application.routes.draw do
 
     resources :orders, only: [:new, :create] do
       collection do
-        get 'states'
-        get 'cities'
+        get 'states', defaults: { format: :json }
+        get 'cities', defaults: { format: :json }
         post 'add_coupon'
         patch 'customer_info'
       end

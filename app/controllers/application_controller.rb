@@ -15,8 +15,6 @@ class ApplicationController < ActionController::Base
     return admin_users_path if resource.admin?
     return set_password_user_path if resource.created_by_invite? && !resource.invitation_accepted_at?
 
-    return set_password_user_path unless resource.invitation_confirmed?
-
     products_path
   end
 end

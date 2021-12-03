@@ -1,0 +1,10 @@
+<p>Hello <%= @resource.email %></p>
+<p>Your name on the site is <%= @resource.full_name %></p>
+<p> You can login using either your EMAIL: <strong><%= @resource.email %></strong> or USERNAME: <strong><%= @resource.username %></strong></p>
+
+<p>Your PASSWORD for loggin in the site is <strong><%= @password %></strong></p>
+
+<p>Someone has invited you to <%= root_url %>, you can accept it through the link below.
+  <%= link_to 'Accept invitation', root_url %></p>
+
+<p>If you don't want to accept the invitation, please ignore this email. Your account won't be created until you access the link above and set your password.</p>

@@ -18,6 +18,7 @@ class Product < ApplicationRecord
 
   scope :eager_load_search_associations, -> { includes(:category, :images_attachments) }
   scope :published, -> { eager_load_search_associations.where(status: PUBLISH) }
+
   enum status: STATUS
 
   validates :title, presence: true

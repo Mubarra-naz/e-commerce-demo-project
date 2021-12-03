@@ -1,10 +1,26 @@
 class Admin::UsersController < Admin::AdminsController
-  before_action :set_user, except: :index
+  before_action :set_user, except: %i[index new create]
 
   def index
     respond_to do |format|
       format.html { @users = User.search(helpers.sort_column, helpers.sort_direction, params[:page], params[:query]) }
       format.csv { send_data CsvProcessor.new(User::CSV_HEADERS, 'User').generate, filename: "users-#{Date.today}.csv" }
+    end
+  end
+
+  def new
+    @user = User.new
+  end
+
+  def create
+    @user = User.new(user_params)
+    @user.set_invitable_user
+
+    if @user.save
+      InvitationMailer.with(user: @user, password: @user.password).invitations_instructions.deliver_later
+      redirect_to admin_users_path, notice: "Invitation sent to user"
+    else
+      render 'new'
     end
   end
 

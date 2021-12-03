@@ -6,7 +6,8 @@ module WithOrder
   end
 
   def add_coupon
-    @coupon = Coupon.find_by_name(params[:coupon_code])
+    @coupon = Coupon.eager_load_search_associations.find_by_name(params[:coupon_code])
+
     if @coupon
       session[:order]["discount"] = Discount.new(@cart.line_items, @coupon).calculate_order_discount
       session[:order]["price"] = session[:order]["price"].to_i - session[:order]["discount"].to_i
@@ -15,8 +16,8 @@ module WithOrder
       flash.now[:error] = "invalid coupon code"
     end
 
-    respond_to do |f|
-      f.js
+    respond_to do |format|
+      format.js
     end
   end
 
@@ -28,8 +29,8 @@ module WithOrder
       flash.now[:error] = @user.errors.full_messages
     end
 
-    respond_to do |f|
-      f.js
+    respond_to do |format|
+      format.js
     end
   end
 

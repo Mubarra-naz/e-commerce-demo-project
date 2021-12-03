@@ -36,7 +36,7 @@ class Admin::ProductsController < Admin::AdminsController
 
   def destroy
     if @product.ordered_products.any?
-      deactivate_product
+      @product.deactivate
       flash[:error] = "Can't delete product, because it is referenced to ordered products. Updated the status to deactivated instead"
     else
       @product.destroy
@@ -47,11 +47,6 @@ class Admin::ProductsController < Admin::AdminsController
   end
 
   private
-
-  def deactivate_product
-    @product.update(status: Product::DEACTIVATED)
-    @product.line_items.destroy_all
-  end
 
   def set_product
     @product = Product.find(params[:id])

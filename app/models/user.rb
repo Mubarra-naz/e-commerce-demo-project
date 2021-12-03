@@ -24,6 +24,8 @@ class User < ApplicationRecord
 
   before_save :set_invite_fields, if: :new_record?
 
+  scope :eager_load_associations, -> { includes(orders: [ordered_products: [:product]]) }
+
   def login
     @login || username || email
   end

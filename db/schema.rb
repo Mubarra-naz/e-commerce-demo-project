@@ -111,13 +111,23 @@ ActiveRecord::Schema.define(version: 2021_12_01_050520) do
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.decimal "price"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.decimal "discount"
+    t.string "payment_method"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "title"
     t.decimal "price"
     t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "category_id", default: 0
+    t.bigint "category_id"
     t.index ["category_id"], name: "index_products_on_category_id"
   end
 
@@ -148,6 +158,9 @@ ActiveRecord::Schema.define(version: 2021_12_01_050520) do
     t.datetime "invitation_accepted_at"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
+    t.index ["invited_by_id"], name: "index_users_on_invited_by_id"
+    t.index ["invited_by_type", "invited_by_id"], name: "index_users_on_invited_by"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end

@@ -26,6 +26,15 @@ Rails.application.routes.draw do
         patch 'customer_info'
       end
     end
+
+    resources :orders, only: [:new, :create] do
+      collection do
+        get 'states'
+        get 'cities'
+        post 'add_coupon'
+        patch 'customer_info'
+      end
+    end
   end
 
   resources :products, only: [:index, :show]
@@ -35,5 +44,6 @@ Rails.application.routes.draw do
     resources :products
     resources :categories
     resources :coupons
+    resources :orders, only: [:index]
   end
 end

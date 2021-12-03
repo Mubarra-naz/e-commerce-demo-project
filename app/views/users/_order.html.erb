@@ -1,0 +1,11 @@
+<tr>
+  <td><%= order.id %></td>
+  <td><%= order.price %></td>
+  <td><%= order.discount %></td>
+  <td><%= order.payment_method %></td>
+  <td>
+    <% order.ordered_products.each  do |item| %>
+    Name: <%= item.product.title %>,   Quantity: <%= item.quantity %><br>
+    <% end %>
+  </td>
+</tr>

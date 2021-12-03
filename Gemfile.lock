@@ -83,6 +83,9 @@ GEM
     bindex (0.8.1)
     bootsnap (1.9.1)
       msgpack (~> 1.0)
+    braintree (4.5.0)
+      builder (>= 3.2.4)
+      rexml (>= 3.1.9)
     builder (3.2.4)
     byebug (11.1.3)
     capybara (3.35.3)
@@ -94,6 +97,8 @@ GEM
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
     childprocess (4.1.0)
+    city-state (0.1.0)
+      rubyzip (>= 1.1)
     concurrent-ruby (1.1.9)
     crass (1.0.6)
     devise (4.8.0)
@@ -102,12 +107,20 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    dotenv (2.7.6)
+    dotenv-rails (2.7.6)
+      dotenv (= 2.7.6)
+      railties (>= 3.2)
     erubi (1.10.0)
     ffi (1.15.4)
     globalid (0.5.2)
       activesupport (>= 5.0)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
+    interactor (3.1.2)
+    interactor-rails (2.2.1)
+      interactor (~> 3.0)
+      rails (>= 4.2)
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
     launchy (2.5.0)
@@ -241,9 +254,13 @@ PLATFORMS
 DEPENDENCIES
   actiontext
   bootsnap (>= 1.4.4)
+  braintree (~> 4.5)
   byebug
   capybara (>= 3.26)
+  city-state
   devise (~> 4.8)
+  dotenv-rails (~> 2.7, >= 2.7.6)
+  interactor-rails (~> 2.0)
   jbuilder (~> 2.7)
   kaminari!
   letter_opener

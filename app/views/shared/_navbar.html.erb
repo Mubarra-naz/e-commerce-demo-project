@@ -22,6 +22,18 @@
           <li class="nav-item">
             <%= link_to 'Coupons', admin_coupons_path, class: 'nav-link text-primary' %>
           </li>
+
+          <li class="nav-item">
+            <%= link_to 'Orders', admin_orders_path, class: 'nav-link text-primary' %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to 'Products', products_path, class: 'nav-link text-primary' %>
+          </li>
+
+          <li class="nav-item">
+            <%= link_to 'Cart', user_cart_path, class: 'nav-link text-danger' %>
+          </li>
         <% end %>
       </ul>
 

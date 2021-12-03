@@ -35,10 +35,12 @@ class Admin::ProductsController < Admin::AdminsController
   end
 
   def destroy
-    if @product.destroy
-      flash[:notice] = "Product deleted successfully"
+    if @product.ordered_products.any?
+      deactivate_product
+      flash[:error] = "Can't delete product, because it is referenced to ordered products. Updated the status to deactivated instead"
     else
-      flash[:error] = @product.errors.full_messages.to_sentence
+      @product.destroy
+      flash[:notice] = "Product deleted successfully"
     end
 
     redirect_to admin_products_path
@@ -46,11 +48,16 @@ class Admin::ProductsController < Admin::AdminsController
 
   private
 
+  def deactivate_product
+    @product.update(status: Product::DEACTIVATED)
+    @product.line_items.destroy_all
+  end
+
   def set_product
     @product = Product.find(params[:id])
   end
 
   def product_params
-    params.require(:product).permit(:title, :description, :price, :status, :category_id)
+    params.require(:product).permit(:title, :description, :price, :status, :category_id, images: [])
   end
 end

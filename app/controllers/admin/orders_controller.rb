@@ -1,5 +1,5 @@
 class Admin::OrdersController < Admin::AdminsController
   def index
-    @orders=Order.includes(:user)
+    @orders = Order.eager_load_associations
   end
 end

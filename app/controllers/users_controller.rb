@@ -21,6 +21,6 @@ class UsersController < ApplicationController
   end
 
   def set_user
-    @user = User.find(current_user.id)
+    @user = User.eager_load_associations.find(current_user.id)
   end
 end

@@ -20,7 +20,7 @@ class Product < ApplicationRecord
   STATUS = {published: PUBLISH, draft: DRAFT, pending: PENDING, deactivated: DEACTIVATED}.freeze
   CSV_HEADERS = %i[id title price status].freeze
 
-  scope :eager_load_search_associations, -> { includes(:category, :images_attachments) }
+  scope :eager_load_search_associations, -> { includes(:category, :images_blobs) }
   scope :published, -> { eager_load_search_associations.where(status: PUBLISH) }
 
   enum status: STATUS
@@ -33,7 +33,6 @@ class Product < ApplicationRecord
   def titleize_title
     title.titleize
   end
-
 
   def deactivate
     update(status: DEACTIVATED)

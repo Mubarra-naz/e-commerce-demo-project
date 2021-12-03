@@ -13,8 +13,18 @@ Rails.application.routes.draw do
     end
 
     resource :cart
+
     resources :line_items do
       post 'update_quantity', on: :member, defaults: { format: :json }
+    end
+
+    resources :orders, only: [:new, :create] do
+      collection do
+        get 'states', defaults: { format: :json }
+        get 'cities', defaults: { format: :json }
+        post 'add_coupon'
+        patch 'customer_info'
+      end
     end
   end
 

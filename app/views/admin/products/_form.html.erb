@@ -24,9 +24,13 @@
 
     <div class="form-group mt-2">
       <%= f.label :category_id, class: "form-label" %>
-      <%= f.select :category_id, select_options('category', :name), {include_blank: true}, { class: "form-control" } %>
+      <%= f.select :category_id, select_options('category', :name), {include_blank: true}, { class: "form-control dropper" } %>
     </div>
 
-    <%= f.submit class: "btn mt-4 px-3 btn-primary" %>
+    <div class="form-group mt-2">
+      <%= f.file_field :images, multiple: true%>
+    </div>
+
+    <%= f.submit class:"btn mt-4 px-3 btn-primary " %>
   <% end %>
 </div>
